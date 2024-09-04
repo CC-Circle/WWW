@@ -30,22 +30,23 @@ public class Controller : MonoBehaviour
     {
         bool isRotating = false; // 視点操作が実行されているかどうかを判定するフラグ
 
-        // if (StartTimer.flag)
-        // {
-        // Flagを入手するためのコード
-        SerialHandler SerialHandler; //呼ぶスクリプトにあだなつける
-        GameObject M5Stack = GameObject.Find("M5stack_Event"); //Playerっていうオブジェクトを探す
-        SerialHandler = M5Stack.GetComponent<SerialHandler>(); //付いているスクリプトを取得
+        if (ShowStartText.flag)
+        {
+            // Flagを入手するためのコード
+            SerialHandler SerialHandler; //呼ぶスクリプトにあだなつける
+            GameObject M5Stack = GameObject.Find("M5stack_Event"); //Playerっていうオブジェクトを探す
+            SerialHandler = M5Stack.GetComponent<SerialHandler>(); //付いているスクリプトを取得
 
-        // ジャイロを入手するためのコード
-        SerialReceive SerialReceive; //呼ぶスクリプトにあだなつける
-        SerialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
+            // ジャイロを入手するためのコード
+            SerialReceive SerialReceive; //呼ぶスクリプトにあだなつける
+            SerialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
 
-        float rotationSpeed = 10f; // 回転速度
-        float moveAmount = 1f * Time.deltaTime;
+            float rotationSpeed = 10f; // 回転速度
+            float moveAmount = 1f * Time.deltaTime;
 
-        // 現在の位置を取得
-        Vector3 currentPosition = transform.position;
+            // 現在の位置を取得
+            Vector3 currentPosition = transform.position;
+
 
         // M5Stack
         if (SerialHandler.Settingsflag)
@@ -102,23 +103,23 @@ public class Controller : MonoBehaviour
             float h = Input.GetAxis("Horizontal"); // 左右キーの取得
             transform.Rotate(0, rotationSpeed * h * 0.1f, 0);
 
-            // マウスのX方向の移動距離を計算
-            Vector3 currentMousePosition = Input.mousePosition;
-            float mouseDeltaX = currentMousePosition.x - lastMousePosition.x;
+                // マウスのX方向の移動距離を計算
+                Vector3 currentMousePosition = Input.mousePosition;
+                float mouseDeltaX = currentMousePosition.x - lastMousePosition.x;
 
-            Kusakariki.transform.Rotate(0, mouseDeltaX * rotationSpeed * 0.005f, 0);
+                Kusakariki.transform.Rotate(0, mouseDeltaX * rotationSpeed * 0.005f, 0);
 
-            // マウスの移動距離に応じて前進
-            if (Mathf.Abs(mouseDeltaX) > 0)
-            {
-                transform.position += transform.forward * Mathf.Abs(mouseDeltaX) * moveSpeed * 5;
-                // 高さは固定
-                transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                // マウスの移動距離に応じて前進
+                if (Mathf.Abs(mouseDeltaX) > 0)
+                {
+                    transform.position += transform.forward * Mathf.Abs(mouseDeltaX) * moveSpeed * 5;
+                    // 高さは固定
+                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                }
+
+                // 現在のマウス位置を次のフレーム用に保存
+                lastMousePosition = currentMousePosition;
             }
-
-            // 現在のマウス位置を次のフレーム用に保存
-            lastMousePosition = currentMousePosition;
         }
     }
 }
-// }
