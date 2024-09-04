@@ -17,6 +17,8 @@ public class Controller : MonoBehaviour
     public float distanceFromCamera = 5f; // カメラからの距離
     private Vector3 lastMousePosition;
 
+    [SerializeField] private GameObject Kusakariki;
+
     void Start()
     {
         // 初期化時にマウスの位置を保存
@@ -89,22 +91,18 @@ public class Controller : MonoBehaviour
             float h = Input.GetAxis("Horizontal"); // 左右キーの取得
             transform.Rotate(0, rotationSpeed * h * 0.1f, 0);
 
-            Debug.Log("Mouse Mode");
-
-
             // マウスのX方向の移動距離を計算
             Vector3 currentMousePosition = Input.mousePosition;
             float mouseDeltaX = currentMousePosition.x - lastMousePosition.x;
 
-            // マウスの移動に応じてプレイヤーを回転
-            transform.Rotate(0, mouseDeltaX * rotationSpeed * 0.001f, 0);
+            Kusakariki.transform.Rotate(0, mouseDeltaX * rotationSpeed * 0.005f, 0);
 
             // マウスの移動距離に応じて前進
             if (Mathf.Abs(mouseDeltaX) > 0)
             {
-                transform.position += transform.forward * Mathf.Abs(mouseDeltaX) * moveSpeed * 10;
+                transform.position += transform.forward * Mathf.Abs(mouseDeltaX) * moveSpeed * 5;
                 // 高さは固定
-                transform.position = new Vector3(transform.position.x, 30, transform.position.z);
+                transform.position = new Vector3(transform.position.x, 0, transform.position.z);
             }
 
             // 現在のマウス位置を次のフレーム用に保存
