@@ -14,19 +14,20 @@ flagはTimer.csで使用
 public class ShowStartText : MonoBehaviour
 {
     public static bool flag = false;
+    [SerializeField] private float TIME = 3;
     [SerializeField] private TextMeshProUGUI StartText;
 
     void Update()
     {
-        if (Time.timeSinceLevelLoad >= 2)
+        if (Time.timeSinceLevelLoad >= TIME - 1)
         {
             flag = true;
             StartText.text = "Start!";
-            if (Time.timeSinceLevelLoad > 3) StartText.text = "";
+            if (Time.timeSinceLevelLoad > TIME) StartText.text = "";
         }
         else
         {
-            StartText.text = Mathf.FloorToInt(3 - Time.timeSinceLevelLoad).ToString("F0");
+            StartText.text = Mathf.FloorToInt(TIME - Time.timeSinceLevelLoad).ToString("F0");
         }
     }
 }
