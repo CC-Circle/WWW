@@ -8,17 +8,14 @@ public class SerialHandler : MonoBehaviour
     public delegate void SerialDataReceivedEventHandler(string message);
     public event SerialDataReceivedEventHandler OnDataReceived;
 
-    // 1人対戦用のシリアルポート名（基本はこちらを使用します）
+    // シリアルポート名
     private string portName = "/dev/cu.m5stack_shibakari_1";
-    // 2人対戦用のシリアルポート名（2人対戦を実装する場合はこちらを使用します）
-    // private string portName = "/dev/cu.m5stack_shibakari_2";
     public int baudRate = 115200; // ボーレート（通信速度）
 
     private SerialPort serialPort; // シリアルポートのインスタンス
 
     //M5Stackgaつながっているかのフラグ
     public bool Settingsflag;
-
 
     // MonoBehaviourのAwakeメソッドはオブジェクトの初期化時に呼ばれます
     private void Awake()
@@ -44,7 +41,7 @@ public class SerialHandler : MonoBehaviour
         }
         catch (System.Exception e)
         {
-            Debug.LogError("Failed to open serial port: " + e.Message); // エラーメッセージを表示
+            Debug.LogWarning("Failed to open serial port: " + e.Message); // エラーメッセージを表示
             return;
         }
 
