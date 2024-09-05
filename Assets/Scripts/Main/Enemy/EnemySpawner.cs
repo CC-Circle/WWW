@@ -83,7 +83,7 @@ public class EnemySpawner : MonoBehaviour
             このレイヤーはメインカメラには見えない．（ミニマップおよびゲーム画面に表示されないように）
             クローンされたオブジェクトはメインやカメラやミニマップに表示されて欲しいので生成後にレイヤーを変更する．
             */
-            int LayerIgnoreRaycast = LayerMask.NameToLayer("Default");
+            int LayerIgnoreRaycast = LayerMask.NameToLayer("Enemy");
             enemyObj.layer = LayerIgnoreRaycast;
 
             Enemy enemyScript = enemyObj.GetComponent<Enemy>();
