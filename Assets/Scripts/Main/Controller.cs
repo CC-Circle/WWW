@@ -13,11 +13,15 @@ public class Controller : MonoBehaviour
 
     [SerializeField] private GameObject Kusakariki;
     int angle = 90;
+    new SphereCollider collider;
+    public static bool isCollide = false;
 
     void Start()
     {
         // 初期化時にマウスの位置を保存
         lastMousePosition = Input.mousePosition;
+        collider = GetComponent<SphereCollider>();
+        collider.enabled = false;
     }
 
     void Update()
@@ -54,6 +58,16 @@ public class Controller : MonoBehaviour
             //マウス
             else if (!SerialHandler.Settingsflag)
             {
+                // コライダーの有効無効を切り替える
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    collider.enabled = true;
+                }
+                else
+                {
+                    collider.enabled = false;
+                }
+
                 // 十字キーでの進行方向変更（回転）
                 float h = Input.GetAxis("Horizontal"); // 左右キーの取得
                 transform.Rotate(0, rotationSpeed * h * 0.1f, 0);
@@ -75,6 +89,14 @@ public class Controller : MonoBehaviour
                 // 現在のマウス位置を次のフレーム用に保存
                 lastMousePosition = currentMousePosition;
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("CloneEnemy") == true && other.gameObject.CompareTag("Enemy") == false)
+        {
+            isCollide = true;
         }
     }
 }
