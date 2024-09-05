@@ -79,7 +79,7 @@ public class EnemySpawner : MonoBehaviour
             Enemy enemyScript = enemyObj.GetComponent<Enemy>();
             enemyScript.StartMoveEnemy(new Vector3(0, 0.5f, 0), arrivalTime);
 
-            Debug.Log("Enemy Spowned Position: " + GetSpawnPosition());
+            // Debug.Log("Enemy Spowned Position: " + GetSpawnPosition());
         }
         else
         {
