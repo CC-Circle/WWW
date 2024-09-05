@@ -44,7 +44,7 @@ public class Timer : MonoBehaviour
 
         // CountTimeのみでも可能だが，可読性向上のために，PauseTimeを使って条件分岐
         // Endシーンに遷移するための条件分岐
-        if (PauseCounter >= 3) MySceneManager.flag = true;
+        if (PauseCounter >= PAUSE) MySceneManager.flag = true;
 
         // 処理2
         //  40秒経過後にFinishTextを表示と一定時間（3秒）停止
