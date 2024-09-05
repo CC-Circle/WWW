@@ -13,7 +13,7 @@ public class HatakeHP : MonoBehaviour
 
     public float debugDamageRate = 0.1f;
 
-    private float currentRate = 1f;
+    public static float currentRate = 1f;
 
     private void Start()
     {
@@ -52,6 +52,8 @@ public class HatakeHP : MonoBehaviour
         }
         if (currentRate <= 0)
         {
+            //resultの条件のため、0に変更
+            currentRate = 0;
             MySceneManager.flag = true;
         }
     }
