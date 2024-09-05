@@ -6631,8 +6631,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1095579727}
   parentObject: {fileID: 44492400}
-  spawnInterval: 2
-  arrivalTime: 20
+  spawnInterval: 1
+  arrivalTime: 3
 --- !u!1001 &1901872186
 PrefabInstance:
   m_ObjectHideFlags: 0

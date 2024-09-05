@@ -18,6 +18,7 @@ public class HatakeHP : MonoBehaviour
     private void Start()
     {
         SetGauge(1f);
+        Hatake hatakeScript = GameObject.Find("Hatake").GetComponent<Hatake>();
     }
 
     public void SetGauge(float value)
@@ -44,9 +45,14 @@ public class HatakeHP : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Hatake.isCollide)
         {
             TakeDamage(debugDamageRate);
+            Hatake.isCollide = false;
+        }
+        if (currentRate <= 0)
+        {
+            MySceneManager.flag = true;
         }
     }
 }
