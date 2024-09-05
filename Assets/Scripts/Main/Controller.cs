@@ -7,12 +7,6 @@ public class Controller : MonoBehaviour
     [SerializeField] private float moveSpeed = 0.001f;
     [SerializeField] private GameObject mainCamera;
     public SerialReceive serialReceive;
-    private int leftRightCount = 0;
-    private bool isSwinging = false; // 振り回し動作のフラグ
-    private float swingDirection = 0; // 現在の振り回し方向
-    private float swingAmount = 30f; // 振り回しの角度
-    private float swingSpeed = 50f; // 振り回しの速度
-    private float swingTime = 0; // 振り回しの経過時間
     public GameObject M5Stack;
     public float distanceFromCamera = 5f; // カメラからの距離
     private Vector3 lastMousePosition;
@@ -32,8 +26,6 @@ public class Controller : MonoBehaviour
 
     void Update()
     {
-        bool isRotating = false; // 視点操作が実行されているかどうかを判定するフラグ
-
         if (ShowStartText.flag)
         {
             // Flagを入手するためのコード
@@ -46,59 +38,22 @@ public class Controller : MonoBehaviour
             SerialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
 
             float rotationSpeed = 10f; // 回転速度
-            float moveAmount = 1f * Time.deltaTime;
-
-            // 現在の位置を取得
-            Vector3 currentPosition = transform.position;
-
 
             // M5Stack
             if (SerialHandler.Settingsflag)
             {
-                if (Input.GetKeyDown(KeyCode.RightArrow))
+                if (SerialReceive.Flag_view == 1)
+                {
+                    //RotateAround(中心の場所,回転軸,回転角度)
+                    transform.RotateAround(Kusakariki.transform.position, Vector3.up, -angle);
+                    SerialReceive.Flag_view = 3;
+                }
+                else if (SerialReceive.Flag_view == 2)
                 {
                     //RotateAround(中心の場所,回転軸,回転角度)
                     transform.RotateAround(Kusakariki.transform.position, Vector3.up, angle);
+                    SerialReceive.Flag_view = 3;
                 }
-                else if (Input.GetKeyDown(KeyCode.LeftArrow))
-                {
-                    //RotateAround(中心の場所,回転軸,回転角度)å
-                    transform.RotateAround(Kusakariki.transform.position, Vector3.up, -angle);
-                }
-                // 視点操作が実行されていない場合のみ振り回し操作を行う
-                // if (!isRotating)
-                // {
-                //     if (serialReceive.Flag == 1 || serialReceive.Flag == 2)
-                //     {
-                //         // 振り回し動作を開始する
-                //         if (!isSwinging)
-                //         {
-                //             isSwinging = true;
-                //             swingDirection = serialReceive.Flag == 1 ? -1 : 1; // 振り回しの方向を設定
-                //             swingTime = 0; // 経過時間のリセット
-                //         }
-
-                //         // 振り回し動作を実行する
-                //         swingTime += Time.deltaTime * swingSpeed;
-                //         float angle = Mathf.Sin(swingTime) * swingAmount; // 振り回しの角度を計算
-                //         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y + angle * swingDirection, 0);
-
-                //         // 振り回しが終了したらフラグをリセット
-                //         if (swingTime > Mathf.PI * 2) // 振り回しが一周したら終了
-                //         {
-                //             isSwinging = false;
-                //             swingTime = 0;
-                //             leftRightCount++;
-                //         }
-                //     }
-                // }
-
-                // // 左右に一回ずつ振ったら前進
-                // if (leftRightCount >= 2)
-                // {
-                //     transform.position += transform.forward * 10; // プレイヤーの向いている方向に前進
-                //     leftRightCount = 0; // カウントをリセット
-                // }
             }
             //マウス
             else if (!SerialHandler.Settingsflag)

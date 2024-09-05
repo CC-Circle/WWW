@@ -9,7 +9,7 @@ public class SerialHandler : MonoBehaviour
     public event SerialDataReceivedEventHandler OnDataReceived;
 
     // シリアルポート名
-    private string portName = "/dev/cu.m5stack_shibakari_1";
+    private string portName = "/dev/cu.wchusbserial575C0331181";
     public int baudRate = 115200; // ボーレート（通信速度）
 
     private SerialPort serialPort; // シリアルポートのインスタンス
@@ -83,7 +83,7 @@ public class SerialHandler : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogError("Error reading from serial port: " + e.Message); // エラーメッセージを表示
+                Debug.LogWarning("Error reading from serial port: " + e.Message); // エラーメッセージを表示
                 Settingsflag = false;//つながっていないのでマウスに切り替え
             }
         }
