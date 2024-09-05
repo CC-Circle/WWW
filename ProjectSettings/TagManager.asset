@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - UI
+  - Enemy
+  - Hatake
+  - CloneEnemy
   layers:
   - Default
   - TransparentFX
@@ -15,7 +18,7 @@ TagManager:
   - Player
   - Enemy
   - Stage
-  - 
+  - Center
   - 
   - 
   - 
