@@ -9,9 +9,12 @@ public class SerialReceive : MonoBehaviour
     private float accX, accY, accZ; // 加速度
     public float gyroX, gyroY, gyroZ; // 角速度(視点変更で使用)
     public float pitch, roll, yaw; // 磁気
-    private float temp; // 温度
+    private float button_flag; // ボタンのフラグ
 
     public int Flag { get; set; }
+    public int Flag_view { get; set; }
+    private int Flag_temp_left = 0;
+    private int Flag_temp_right = 0;
 
     void Start()
     {
@@ -60,12 +63,14 @@ public class SerialReceive : MonoBehaviour
 
                 // 温度のデータを切り離し，それぞれの変数に代入
                 string tempData = sections[3].Substring(6);
-                temp = float.Parse(tempData);
+                button_flag = float.Parse(tempData);
 
-                // Debug.Logへの表示
+                // 加速度のデータを表示
                 // Debug.Log($"Received accel data accX: {accX}, Y:{accY}, Z:{accZ}");
-                // Debug.Logへの表示
-                //Debug.Log($"Received accel data: X:{accX}, Y:{accY}, Z:{accZ}");
+                // ジャイロのデータを表示
+                // Debug.Log($"Received accel data: X:{gyroX}, Y:{gyroY}, Z:{gyroZ}");
+                //ボタンのデータを表示
+                // Debug.Log($"Received button data: {button_flag}");
 
                 // 移動のためのフラッグ
                 if (accX > 0.8f)
@@ -78,15 +83,20 @@ public class SerialReceive : MonoBehaviour
                     // 左
                     Flag = 2;
                 }
-                else if (accY > 0.5)
-                {
-                    // 上
-                    Flag = 3;
-                }
-                else
-                {
-                    // 真ん中
-                    Flag = 0;
+
+                // 視点変更のflag
+                if (accX > 0.2) {
+                    Flag_temp_left++;
+                    if (Flag_temp_left == 20) {
+                        Flag_view = 1;
+                        Flag_temp_left = 0;
+                    }
+                } else if (accX < -0.2) {
+                    Flag_temp_right++;
+                    if (Flag_temp_right == 20) {
+                        Flag_view = 2;
+                        Flag_temp_right = 0;
+                    }
                 }
                 // Debug.Logへの表示
                 // Debug.Log(Flag);
