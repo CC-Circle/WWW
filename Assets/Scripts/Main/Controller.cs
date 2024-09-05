@@ -135,4 +135,12 @@ public class Controller : MonoBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("CloneEnemy"))
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }

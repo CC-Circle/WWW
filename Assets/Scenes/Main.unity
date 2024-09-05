@@ -3730,7 +3730,7 @@ GameObject:
   - component: {fileID: 1095579730}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3782,8 +3782,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 3
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!54 &1095579731
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6384,8 +6384,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1095579727}
   parentObject: {fileID: 44492400}
-  spawnInterval: 5
-  arrivalTime: 10
+  spawnInterval: 2
+  arrivalTime: 20
 --- !u!1001 &1901872186
 PrefabInstance:
   m_ObjectHideFlags: 0
