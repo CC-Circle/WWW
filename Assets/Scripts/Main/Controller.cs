@@ -20,6 +20,7 @@ public class Controller : MonoBehaviour
     [SerializeField] private GameObject Kusakariki;
     int angle = 90;
     new SphereCollider collider;
+    public static bool isCollide = false;
 
     void Start()
     {
@@ -138,9 +139,9 @@ public class Controller : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("CloneEnemy"))
+        if (other.gameObject.CompareTag("CloneEnemy") == true && other.gameObject.CompareTag("Enemy") == false)
         {
-            Destroy(other.gameObject);
+            isCollide = true;
         }
     }
 }
