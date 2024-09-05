@@ -141,7 +141,6 @@ public class Controller : MonoBehaviour
     {
         if (other.gameObject.CompareTag("CloneEnemy") == true && other.gameObject.CompareTag("Enemy") == false)
         {
-            Debug.Log("Hit");
             isCollide = true;
         }
     }
