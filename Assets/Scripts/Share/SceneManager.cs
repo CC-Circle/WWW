@@ -17,8 +17,9 @@ public class MySceneManager : MonoBehaviour
         // 現在のシーン名を取得
         NowScene = SceneManager.GetActiveScene().name;
 
-        if (NowScene == "Start")
+        if (NowScene == "Start" && flag)
         {
+            Debug.Log("通過");
             flag = false;
             SceneManager.LoadScene("Main");
 
@@ -27,6 +28,11 @@ public class MySceneManager : MonoBehaviour
         {
             flag = false;
             SceneManager.LoadScene("End");
+        }
+        else if (NowScene == "End" && flag)
+        {
+            flag = false;
+            SceneManager.LoadScene("Start");
         }
     }
 }
