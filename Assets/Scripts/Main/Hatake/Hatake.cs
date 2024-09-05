@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hatake : MonoBehaviour
 {
+    public static bool isCollide = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,7 @@ public class Hatake : MonoBehaviour
     {
         if (other.gameObject.CompareTag("CloneEnemy"))
         {
+            isCollide = true;
             Destroy(other.gameObject);
         }
     }
