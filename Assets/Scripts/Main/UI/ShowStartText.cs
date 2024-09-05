@@ -14,7 +14,7 @@ flagはTimer.csで使用
 public class ShowStartText : MonoBehaviour
 {
     public static bool flag = false;
-    [SerializeField] private float TIME = 3;
+    [SerializeField] private float TIME = 5;
     [SerializeField] private TextMeshProUGUI StartText;
 
     void Update()
