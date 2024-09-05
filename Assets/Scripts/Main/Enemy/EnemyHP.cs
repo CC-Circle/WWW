@@ -17,7 +17,7 @@ public class EnemyHP : MonoBehaviour
     void Start()
     {
         hpSlider.value = (float)enemyHP;
-        wkHP = enemyHP;
+        wkHP = enemyHP + 50;
     }
 
     // Update is called once per frame
@@ -31,17 +31,14 @@ public class EnemyHP : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // あたった場合敵を削除
-        if (Controller.isCollide && other.gameObject.CompareTag("Player") & !gameObject.CompareTag("Enemy"))
+        wkHP -= 50;
+        hpSlider.value = (float)wkHP / (float)enemyHP;
+        if (wkHP == 0)
         {
-            wkHP -= 50;
-            hpSlider.value = (float)wkHP / (float)enemyHP;
-            if (wkHP == 0)
-            {
-                Debug.Log("Destroy");
-                Destroy(gameObject, 0f);
-            }
-            Controller.isCollide = false;
+            Debug.Log("Destroy");
+            Destroy(gameObject, 0f);
         }
+        Controller.isCollide = false;
     }
 
 }
