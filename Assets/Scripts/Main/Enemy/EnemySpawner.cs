@@ -57,11 +57,11 @@ public class EnemySpawner : MonoBehaviour
     /// </summary>
     private void SetRomdomSpawnPosition()
     {
-        float x = Random.Range(-24.0f, 24.0f);
+        float x = Random.Range(-500.0f, 500.0f);
         float z;
         do
         {
-            z = Random.Range(-24.0f, 24.0f);
+            z = Random.Range(-500.0f, 500.0f);
         } while (Mathf.Approximately(x, z));
 
         SetSpawnPosition(new Vector3(x, 0.5f, z));
@@ -76,6 +76,16 @@ public class EnemySpawner : MonoBehaviour
         if (enemyPrefab != null)
         {
             GameObject enemyObj = Instantiate(enemyPrefab, GetSpawnPosition(), Quaternion.identity, parentObject);
+            // cloneオブジェクト用のを設定
+            enemyObj.tag = "CloneEnemy";
+            // レイヤーの設定
+            /* 参照下のEnemyのレイヤーはCenterに設定されている（クローンされたオブジェクトは参照下のオブジェクトに向かって移動するため）
+            このレイヤーはメインカメラには見えない．（ミニマップおよびゲーム画面に表示されないように）
+            クローンされたオブジェクトはメインやカメラやミニマップに表示されて欲しいので生成後にレイヤーを変更する．
+            */
+            int LayerIgnoreRaycast = LayerMask.NameToLayer("Default");
+            enemyObj.layer = LayerIgnoreRaycast;
+
             Enemy enemyScript = enemyObj.GetComponent<Enemy>();
             enemyScript.StartMoveEnemy(new Vector3(0, 0.5f, 0), arrivalTime);
 

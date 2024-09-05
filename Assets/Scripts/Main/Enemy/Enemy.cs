@@ -20,11 +20,6 @@ public class Enemy : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// 敵を指定された位置に一定時間で移動させるコルーチンを開始します。
-    /// </summary>
-    /// <param name="targetPosition">移動先の目標位置</param>
-    /// <param name="time">目標位置に到達するまでの時間（秒単位）</param>
     public void StartMoveEnemy(Vector3 targetPosition, float time)
     {
         StartCoroutine(MoveEnemy(targetPosition, time));
@@ -61,17 +56,5 @@ public class Enemy : MonoBehaviour
 
         // 最終的に目標位置に到達
         transform.position = targetPosition;
-    }
-
-    /// <summary>
-    /// 他のオブジェクトと衝突した時に呼び出されるメソッドです。
-    /// </summary>
-    /// <param name="Collider">衝突したオブジェクトのコライダー</param>
-    void OnTriggerEnter(Collider Collider)
-    {
-        if (Collider.gameObject.name == "Player")
-        {
-            Destroy(gameObject);
-        }
     }
 }
