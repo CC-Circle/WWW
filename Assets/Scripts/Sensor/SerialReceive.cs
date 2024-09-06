@@ -6,7 +6,8 @@ public class SerialReceive : MonoBehaviour
 {
     public SerialHandler serialHandler;
 
-    public int Flag_view { get; set; } // 1 for left, 2 for right
+    public int Flag_view = 0;
+    public int Flag_button = 0;
     public int left_count = 0;
     public int right_count = 0;
 
@@ -31,7 +32,7 @@ public class SerialReceive : MonoBehaviour
             if (flag == 1) // 左回転のフラグ
             {
                 left_count++;
-                if (left_count > 10 && Flag_view != 3)
+                if (left_count > 10)
                 {
                     Flag_view = 1;
                     left_count = 0;
@@ -40,7 +41,7 @@ public class SerialReceive : MonoBehaviour
             else if (flag == 2) // 右回転のフラグ
             {
                 right_count++;
-                if (right_count > 10 && Flag_view != 3)
+                if (right_count > 10)
                 {
                     Flag_view = 2;
                     right_count = 0;
@@ -49,6 +50,14 @@ public class SerialReceive : MonoBehaviour
             else if (flag == 0) // 停止のフラグ
             {
                 Flag_view = 0;
+            } 
+            else if (flag == 10)
+            {
+                Flag_button = 1;
+            }
+            else if (flag == -1)
+            {
+                Flag_button = 0;
             }
         }
         catch (System.Exception e)
