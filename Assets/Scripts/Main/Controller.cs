@@ -58,10 +58,12 @@ public class Controller : MonoBehaviour
             //マウス
             else if (!SerialHandler.Settingsflag)
             {
-                // コライダーの有効無効を切り替える
                 if (Input.GetKey(KeyCode.Space))
                 {
                     collider.enabled = true;
+                    transform.position += transform.forward * moveSpeed * 1000;
+                    // y軸の高さの固定
+                    transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
                 }
                 else
                 {
@@ -77,14 +79,6 @@ public class Controller : MonoBehaviour
                 float mouseDeltaX = currentMousePosition.x - lastMousePosition.x;
 
                 Kusakariki.transform.Rotate(0, mouseDeltaX * rotationSpeed * 0.005f, 0);
-
-                // マウスの移動距離に応じて前進
-                if (Mathf.Abs(mouseDeltaX) > 0)
-                {
-                    transform.position += transform.forward * Mathf.Abs(mouseDeltaX) * moveSpeed * 5;
-                    // 高さは固定
-                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-                }
 
                 // 現在のマウス位置を次のフレーム用に保存
                 lastMousePosition = currentMousePosition;
