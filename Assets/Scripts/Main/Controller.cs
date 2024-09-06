@@ -45,14 +45,24 @@ public class Controller : MonoBehaviour
                 if (SerialReceive.Flag_view == 1)
                 {
                     //RotateAround(中心の場所,回転軸,回転角度)
-                    transform.RotateAround(Kusakariki.transform.position, Vector3.up, -angle);
-                    SerialReceive.Flag_view = 3;
+                    transform.RotateAround(Kusakariki.transform.position, Vector3.up, -0.5f);
                 }
                 else if (SerialReceive.Flag_view == 2)
                 {
                     //RotateAround(中心の場所,回転軸,回転角度)
-                    transform.RotateAround(Kusakariki.transform.position, Vector3.up, angle);
-                    SerialReceive.Flag_view = 3;
+                    transform.RotateAround(Kusakariki.transform.position, Vector3.up, 0.5f);
+                }
+
+                if (Input.GetKey(KeyCode.Space) || SerialReceive.Flag_button == 1)
+                {
+                    collider.enabled = true;
+                    transform.position += transform.forward * moveSpeed * 1000;
+                    // y軸の高さの固定
+                    transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+                }
+                else
+                {
+                    collider.enabled = false;
                 }
             }
             //マウス
