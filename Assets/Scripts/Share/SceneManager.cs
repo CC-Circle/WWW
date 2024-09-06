@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,6 +17,7 @@ public class MySceneManager : MonoBehaviour
     {
         // 現在のシーン名を取得
         NowScene = SceneManager.GetActiveScene().name;
+        ForceChangeScene();
 
         if (NowScene == "Start" && flag)
         {
@@ -33,6 +35,25 @@ public class MySceneManager : MonoBehaviour
         {
             flag = false;
             SceneManager.LoadScene("Start");
+        }
+    }
+    private void ForceChangeScene()
+    {
+        // キーボードでシーン遷移
+        // 1: Start
+        // 2: Main
+        // 3: End
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SceneManager.LoadScene("Start");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SceneManager.LoadScene("Main");
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SceneManager.LoadScene("End");
         }
     }
 }
