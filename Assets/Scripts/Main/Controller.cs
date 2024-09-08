@@ -16,6 +16,8 @@ public class Controller : MonoBehaviour
     new SphereCollider collider;
     public static bool isCollide = false;
 
+    private float SEInterval = 3f;
+
     [SerializeField] private ParticleSystem particle;
 
     void Start()
@@ -63,6 +65,7 @@ public class Controller : MonoBehaviour
                     // y軸の高さの固定
                     transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
                     particle.Play();
+
                 }
                 else
                 {
@@ -80,6 +83,14 @@ public class Controller : MonoBehaviour
                     // y軸の高さの固定
                     transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
                     particle.Play();
+
+                    if (Time.time > SEInterval)
+                    {
+                        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+                        soundManager.PlaySound(1);
+                        SEInterval = Time.time + 2f;
+                    }
+
                 }
                 else
                 {

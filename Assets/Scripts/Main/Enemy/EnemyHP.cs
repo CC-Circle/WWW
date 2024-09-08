@@ -13,11 +13,13 @@ public class EnemyHP : MonoBehaviour
 
     public Slider hpSlider;
 
+    private bool isShotSE = true;
+
     // Use this for initialization
     void Start()
     {
         hpSlider.value = (float)enemyHP;
-        wkHP = enemyHP + 50;
+        wkHP = enemyHP;
     }
 
     // Update is called once per frame
@@ -30,15 +32,23 @@ public class EnemyHP : MonoBehaviour
     // 衝突した瞬間に呼ばれる 
     private void OnTriggerEnter(Collider other)
     {
-        // あたった場合敵を削除
-        wkHP -= 50;
-        hpSlider.value = (float)wkHP / (float)enemyHP;
-        if (wkHP == 0)
+        if (other.gameObject.tag == "Player")
         {
-            Debug.Log("Destroy");
-            Destroy(gameObject, 0f);
-        }
-        Controller.isCollide = false;
-    }
 
+            SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+            soundManager.SetVolume(0.5f);
+            soundManager.PlaySound(2);
+
+
+            // あたった場合敵を削除
+            wkHP -= 50;
+            hpSlider.value = (float)wkHP / (float)enemyHP;
+            if (wkHP == 0)
+            {
+                Debug.Log("Destroy");
+                Destroy(gameObject, 0f);
+            }
+            Controller.isCollide = false;
+        }
+    }
 }

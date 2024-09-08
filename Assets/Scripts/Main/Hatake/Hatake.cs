@@ -5,22 +5,17 @@ using UnityEngine;
 public class Hatake : MonoBehaviour
 {
     public static bool isCollide = false;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("CloneEnemy"))
         {
             isCollide = true;
+
+            SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+            soundManager.SetVolume(0.5f);
+            soundManager.PlaySound(0);
+
             Destroy(other.gameObject);
         }
     }

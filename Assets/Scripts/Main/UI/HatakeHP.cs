@@ -15,6 +15,9 @@ public class HatakeHP : MonoBehaviour
 
     public static float currentRate = 1f;
 
+    private float PauseTime = 0f;
+    private bool isShotSE = true;
+
     private void Start()
     {
         SetGauge(1f);
@@ -54,7 +57,20 @@ public class HatakeHP : MonoBehaviour
         {
             //resultの条件のため、0に変更
             currentRate = 0;
-            MySceneManager.flag = true;
+
+            PauseTime += Time.deltaTime;
+
+            if (PauseTime >= 3) MySceneManager.flag = true;
+
+            isShotSE = isShotSE ? true : false;
+            if (isShotSE) OneShotSE();
         }
+    }
+
+    void OneShotSE()
+    {
+        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager.PlaySound(3);
+        isShotSE = false;
     }
 }
