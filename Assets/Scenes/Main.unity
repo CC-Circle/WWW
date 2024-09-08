@@ -6911,6 +6911,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906ccf9b64769402f9c6c5747374eea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  portName: /dev/cu.usbserial-575C0331181
   baudRate: 115200
   Settingsflag: 0
 --- !u!114 &1744868895
@@ -6926,6 +6927,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serialHandler: {fileID: 1744868894}
+  Flag_view: 0
+  Flag_button: 0
   left_count: 0
   right_count: 0
 --- !u!1 &1758785934
