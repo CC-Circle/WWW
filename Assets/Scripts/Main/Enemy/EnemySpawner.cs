@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour
     /// <summary>
     /// 敵のプレハブ。Inspectorで設定する必要があります。
     /// </summary>
-    [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject[] enemyPrefab;
     [SerializeField] private Transform parentObject;
 
 
@@ -75,7 +75,9 @@ public class EnemySpawner : MonoBehaviour
         SetRomdomSpawnPosition();
         if (enemyPrefab != null)
         {
-            GameObject enemyObj = Instantiate(enemyPrefab, GetSpawnPosition(), Quaternion.identity, parentObject);
+            // enemyPrefabのうちランダムで選択
+            GameObject enemyObj = Instantiate(enemyPrefab[Random.Range(0, enemyPrefab.Length)], GetSpawnPosition(), Quaternion.identity, parentObject);
+            // GameObject enemyObj = Instantiate(enemyPrefab[0], GetSpawnPosition(), Quaternion.identity, parentObject);
             // cloneオブジェクト用のを設定
             enemyObj.tag = "CloneEnemy";
             // レイヤーの設定
