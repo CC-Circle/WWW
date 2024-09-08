@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using UnityEditor.Rendering;
 using UnityEditor.UIElements;
 using System.Media;
+using Unity.VisualScripting;
 
 /*
 Timer.csの処理の流れ
@@ -24,6 +25,8 @@ public class Timer : MonoBehaviour
     private float PauseCounter = 0;
     [SerializeField] private float PAUSE = 3;
     [SerializeField] private GameObject FinishText;
+
+    private bool isShotSE = true;
 
     void Start()
     {
@@ -68,7 +71,16 @@ public class Timer : MonoBehaviour
             }
             FinishText.SetActive(true);
 
-
+            // isShotSEがfalseの場合にOneShotSE()を実行
+            isShotSE = isShotSE ? true : false;
+            if (isShotSE) OneShotSE();
         }
+    }
+
+    private void OneShotSE()
+    {
+        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager.PlaySound(5);
+        isShotSE = false;
     }
 }
