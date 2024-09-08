@@ -40,6 +40,8 @@ public class Enemy : MonoBehaviour
         {
             // 移動位置を計算し設定
             transform.position = Vector3.MoveTowards(startPosition, targetPosition, (elapsedTime / time) * Vector3.Distance(startPosition, targetPosition));
+            // 常に(0,0,0)を向く
+            transform.LookAt(Vector3.zero);
 
             // 経過時間を更新
             elapsedTime += Time.deltaTime;
