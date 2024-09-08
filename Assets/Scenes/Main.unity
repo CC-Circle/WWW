@@ -506,6 +506,7 @@ MonoBehaviour:
   M5Stack: {fileID: 1744868892}
   distanceFromCamera: 5
   Kusakariki: {fileID: 540815981}
+  particle: {fileID: 865928933}
 --- !u!135 &170457409
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1471,6 +1472,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 540815982}
     m_Modifications:
+    - target: {fileID: 3540904551753720234, guid: 21866ff9d7e1646bfb086e153e9cae10, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540904551753720234, guid: 21866ff9d7e1646bfb086e153e9cae10, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540904551753720234, guid: 21866ff9d7e1646bfb086e153e9cae10, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5789987933982573037, guid: 21866ff9d7e1646bfb086e153e9cae10, type: 3}
       propertyPath: m_Name
       value: Kusakariki
@@ -2870,6 +2883,11 @@ Transform:
   - {fileID: 2078483673}
   m_Father: {fileID: 1219198506}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &865928933 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8114588388748533852, guid: 21866ff9d7e1646bfb086e153e9cae10, type: 3}
+  m_PrefabInstance: {fileID: 417302559}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &869481283
 GameObject:
   m_ObjectHideFlags: 0

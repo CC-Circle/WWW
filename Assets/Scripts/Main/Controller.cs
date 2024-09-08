@@ -16,12 +16,15 @@ public class Controller : MonoBehaviour
     new SphereCollider collider;
     public static bool isCollide = false;
 
+    [SerializeField] private ParticleSystem particle;
+
     void Start()
     {
         // 初期化時にマウスの位置を保存
         lastMousePosition = Input.mousePosition;
         collider = GetComponent<SphereCollider>();
         collider.enabled = false;
+        particle.Stop();
     }
 
     void Update()
@@ -59,10 +62,12 @@ public class Controller : MonoBehaviour
                     transform.position += transform.forward * moveSpeed * 1000;
                     // y軸の高さの固定
                     transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+                    particle.Play();
                 }
                 else
                 {
                     collider.enabled = false;
+                    particle.Stop();
                 }
             }
             //マウス
@@ -74,10 +79,12 @@ public class Controller : MonoBehaviour
                     transform.position += transform.forward * moveSpeed * 1000;
                     // y軸の高さの固定
                     transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+                    particle.Play();
                 }
                 else
                 {
                     collider.enabled = false;
+                    particle.Stop();
                 }
 
                 // 十字キーでの進行方向変更（回転）
