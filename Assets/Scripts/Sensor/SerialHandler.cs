@@ -10,7 +10,8 @@ public class SerialHandler : MonoBehaviour
 
     // シリアルポート名
     // /dev/cu.usbserial-575C0331181 は新美の場合のポート名
-    [SerializeField] private string portName = "/dev/cu.usbserial-575C0331181";
+    // [SerializeField] private string portName = "/dev/cu.usbserial-575C0331181"; // 新美
+    [SerializeField] private string portName = "/dev/cu.usbmodem55910045011";
     public int baudRate = 115200; // ボーレート（通信速度）
 
     private SerialPort serialPort; // シリアルポートのインスタンス
