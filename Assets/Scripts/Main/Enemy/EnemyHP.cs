@@ -13,7 +13,6 @@ public class EnemyHP : MonoBehaviour
 
     public Slider hpSlider;
 
-    private bool isShotSE = true;
 
     // Use this for initialization
     void Start()
