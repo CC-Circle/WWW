@@ -10,11 +10,15 @@ public class NewBehaviourScript : MonoBehaviour
     {
         MySceneManager.flag = false;
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        // Flagを入手するためのコード
+        SerialReceive serialReceive; //呼ぶスクリプトにあだなつける
+        GameObject M5Stack = GameObject.Find("M5stack_Event"); //Playerっていうオブジェクトを探す
+        serialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
+
+        if (serialReceive.Flag_button == 1)
         {
             MySceneManager.flag = true;
         }
