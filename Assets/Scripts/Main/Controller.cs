@@ -65,6 +65,13 @@ public class Controller : MonoBehaviour
                     transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
                     particle.Play();
 
+                    if (Time.time > SEInterval)
+                    {
+                        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+                        soundManager.PlaySound(1);
+                        SEInterval = Time.time + 2f;
+                    }
+
                 }
                 else
                 {
