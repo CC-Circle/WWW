@@ -23,10 +23,9 @@ public class Hatake : MonoBehaviour
     void Update()
     {
         Timer TimerScript = GameObject.Find("UIManager").GetComponent<Timer>();
-        if (TimerScript.CountTime == 0)
+        if (TimerScript.CountTime <= 0)
         {
-            // ここに処理を書く
-            isCollide = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
 }
