@@ -34,6 +34,19 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(EnemySpowner());
     }
 
+    void Update()
+    {
+        Timer TimerScript = GameObject.Find("UIManager").GetComponent<Timer>();
+        if (TimerScript.CountTime < 20)
+        {
+            spawnInterval = 3.0f;
+        }
+        else if (TimerScript.CountTime < 10)
+        {
+            spawnInterval = 1.0f;
+        }
+    }
+
     /// <summary>
     /// 敵の生成位置を設定します。
     /// </summary>

@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Hatake
   - CloneEnemy
+  - Overlap
   layers:
   - Default
   - TransparentFX

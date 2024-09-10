@@ -12,7 +12,6 @@ public class Controller : MonoBehaviour
     private Vector3 lastMousePosition;
 
     [SerializeField] private GameObject Kusakariki;
-    int angle = 90;
     new SphereCollider collider;
     public static bool isCollide = false;
 
@@ -66,10 +65,17 @@ public class Controller : MonoBehaviour
                     transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
                     particle.Play();
 
+                    if (Time.time > SEInterval)
+                    {
+                        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+                        soundManager.PlaySound(1);
+                        SEInterval = Time.time + 2f;
+                    }
+
                 }
                 else
                 {
-                    collider.enabled = false;
+                    // collider.enabled = false;
                     particle.Stop();
                 }
             }
@@ -94,7 +100,7 @@ public class Controller : MonoBehaviour
                 }
                 else
                 {
-                    collider.enabled = false;
+                    // collider.enabled = false;
                     particle.Stop();
                 }
 
@@ -111,14 +117,6 @@ public class Controller : MonoBehaviour
                 // 現在のマウス位置を次のフレーム用に保存
                 lastMousePosition = currentMousePosition;
             }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("CloneEnemy") == true && other.gameObject.CompareTag("Enemy") == false)
-        {
-            isCollide = true;
         }
     }
 }

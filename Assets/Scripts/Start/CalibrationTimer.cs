@@ -16,45 +16,39 @@ Timer.csの処理の流れ
 3. FinishText表示後に3秒経過すると，MySceneManager.flagをtrueにしてEndシーンに遷移
 */
 
-public class Timer : MonoBehaviour
+public class CalibrationTimer : MonoBehaviour
 {
-    public float CountTime = 40;
+    public float CountTime = 10;
     [SerializeField] private Image uiFill;
-    [SerializeField] private TextMeshProUGUI uiText;
-    private GameObject[] UiElements;
     private float PauseCounter = 0;
-    [SerializeField] private float PAUSE = 3;
     [SerializeField] private GameObject FinishText;
-
-    private bool isShotSE = true;
+    private GameObject[] UiElements;
+    [SerializeField] private TextMeshProUGUI uiText;
 
     void Start()
     {
-        UiElements = GameObject.FindGameObjectsWithTag("UI");
         FinishText.SetActive(false);
         MySceneManager.flag = false;
+        UiElements = GameObject.FindGameObjectsWithTag("UI");
     }
 
     void Update()
     {
-        if (ShowStartText.flag)
-        {
-            // 時間を減らす
-            CountTime -= Time.deltaTime;
-            uiText.text = Mathf.FloorToInt(CountTime).ToString("F0");
-            // FillのFillAmountを時間に応じて変化
-            uiFill.fillAmount = Mathf.InverseLerp(0, 40, CountTime);
-        }
+        // 時間を減らす
+        CountTime -= Time.deltaTime;
+        // FillのFillAmountを時間に応じて変化
+        uiFill.fillAmount = Mathf.InverseLerp(0, 10, CountTime);
+
 
         // CountTimeのみでも可能だが，可読性向上のために，PauseTimeを使って条件分岐
         // Endシーンに遷移するための条件分岐
-        if (PauseCounter >= PAUSE) MySceneManager.flag = true;
-
-        // 処理2
-        //  40秒経過後にFinishTextを表示と一定時間（3秒）停止
         if (CountTime <= 0)
         {
+
             PauseCounter += Time.deltaTime; // 一時停止時間の計測開始
+
+            FinishText.SetActive(true);
+            uiText.text = "ボタンを押してスタート!!";
 
             foreach (GameObject UiElement in UiElements)
             {
@@ -70,18 +64,33 @@ public class Timer : MonoBehaviour
                 canvasGroup.interactable = false;
                 canvasGroup.blocksRaycasts = false;
             }
-            FinishText.SetActive(true);
 
-            // isShotSEがfalseの場合にOneShotSE()を実行
-            isShotSE = isShotSE ? true : false;
-            if (isShotSE) OneShotSE();
+            // Flagを入手するためのコード
+            SerialHandler SerialHandler; //呼ぶスクリプトにあだなつける
+            GameObject M5Stack = GameObject.Find("M5stack_Event"); //Playerっていうオブジェクトを探す
+            SerialHandler = M5Stack.GetComponent<SerialHandler>(); //付いているスクリプトを取得
+
+            SerialReceive serialReceive;
+            SerialReceive SerialReceive; //呼ぶスクリプトにあだなつける
+            SerialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
+
+            if (SerialHandler.Settingsflag)
+            {
+                // Flagを入手するためのコード
+                serialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
+
+                if (serialReceive.Flag_button == 1 || Input.GetKey(KeyCode.Space))
+                {
+                    MySceneManager.flag = true;
+                }
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.Space))
+                {
+                    MySceneManager.flag = true;
+                }
+            }
         }
-    }
-
-    private void OneShotSE()
-    {
-        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-        soundManager.PlaySound(5);
-        isShotSE = false;
     }
 }

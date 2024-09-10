@@ -13,8 +13,6 @@ public class EnemyHP : MonoBehaviour
 
     public Slider hpSlider;
 
-    private bool isShotSE = true;
-
     // Use this for initialization
     void Start()
     {
@@ -48,7 +46,27 @@ public class EnemyHP : MonoBehaviour
                 Debug.Log("Destroy");
                 Destroy(gameObject, 0f);
             }
-            Controller.isCollide = false;
+            // Controller.isCollide = false;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+
+            SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+            soundManager.SetVolume(0.5f);
+            soundManager.PlaySound(2);
+
+
+            // あたった場合敵を削除
+            wkHP -= 50;
+            hpSlider.value = (float)wkHP / (float)enemyHP;
+            if (wkHP == 0)
+            {
+                Destroy(gameObject, 0f);
+            }
+            // Controller.isCollide = false;
         }
     }
 }
