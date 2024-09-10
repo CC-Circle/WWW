@@ -12,7 +12,6 @@ public class Controller : MonoBehaviour
     private Vector3 lastMousePosition;
 
     [SerializeField] private GameObject Kusakariki;
-    int angle = 90;
     new SphereCollider collider;
     public static bool isCollide = false;
 

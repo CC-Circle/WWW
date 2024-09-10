@@ -9,9 +9,9 @@ public class SerialHandler : MonoBehaviour
     public event SerialDataReceivedEventHandler OnDataReceived;
 
     // シリアルポート名
-    // /dev/cu.usbserial-575C0331181 は新美の場合のポート名
-    // [SerializeField] private string portName = "/dev/cu.usbserial-575C0331181"; // 新美
-    [SerializeField] private string portName = "/dev/cu.usbmodem55910045011";
+    // ls /dev/tty* | grep usb
+    [SerializeField] private string portName = "/dev/tty.usbserial-55910044091"; // 新美
+    // [SerializeField] private string portName = "/dev/cu.usbmodem55910045011";
     public int baudRate = 115200; // ボーレート（通信速度）
 
     private SerialPort serialPort; // シリアルポートのインスタンス
