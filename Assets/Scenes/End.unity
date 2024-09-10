@@ -1658,7 +1658,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatake5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1068007070711219167, guid: d1e33216e30f84ec286f5b367b1ed300, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2558,7 +2559,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatake4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1068007070711219167, guid: 713cae095604e4e5ea5a3a9e78cc4e46, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -8787,7 +8789,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatake1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1068007070711219167, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -10934,7 +10937,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatake3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1068007070711219167, guid: c586bec6fb7914f8f8a00a996a389be8, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -11502,7 +11506,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hatake2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1068007070711219167, guid: f4eb9cd61d73d492baf94c33b0e83f7a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

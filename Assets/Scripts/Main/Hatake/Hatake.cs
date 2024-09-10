@@ -19,4 +19,14 @@ public class Hatake : MonoBehaviour
             Destroy(other.gameObject);
         }
     }
+
+    void Update()
+    {
+        Timer TimerScript = GameObject.Find("UIManager").GetComponent<Timer>();
+        if (TimerScript.CountTime == 0)
+        {
+            // ここに処理を書く
+            isCollide = false;
+        }
+    }
 }
