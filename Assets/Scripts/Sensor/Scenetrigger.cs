@@ -5,22 +5,39 @@ using UnityEngine;
 public class NewBehaviourScript : MonoBehaviour
 {
     public static bool flag = false;
-    // Start is called before the first frame update
+
     void Start()
     {
         MySceneManager.flag = false;
     }
-    // Update is called once per frame
+
     void Update()
     {
         // Flagを入手するためのコード
-        SerialReceive serialReceive; //呼ぶスクリプトにあだなつける
+        SerialHandler SerialHandler; //呼ぶスクリプトにあだなつける
         GameObject M5Stack = GameObject.Find("M5stack_Event"); //Playerっていうオブジェクトを探す
-        serialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
+        SerialHandler = M5Stack.GetComponent<SerialHandler>(); //付いているスクリプトを取得
 
-        if (serialReceive.Flag_button == 1)
+        SerialReceive serialReceive;
+        SerialReceive SerialReceive; //呼ぶスクリプトにあだなつける
+        SerialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
+
+        if (SerialHandler.Settingsflag)
         {
-            MySceneManager.flag = true;
+            // Flagを入手するためのコード
+            serialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
+
+            if (serialReceive.Flag_button == 1 || Input.GetKey(KeyCode.Space))
+            {
+                MySceneManager.flag = true;
+            }
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                MySceneManager.flag = true;
+            }
         }
     }
 }

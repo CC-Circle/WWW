@@ -29,7 +29,7 @@ public class ShowStartText : MonoBehaviour
         if (Time.timeSinceLevelLoad >= TIME - 1)
         {
             flag = true;
-            StartText.text = "Start!";
+            StartText.text = "スタート!";
             if (Time.timeSinceLevelLoad > TIME) StartText.text = "";
         }
         else
