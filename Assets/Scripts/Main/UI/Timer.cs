@@ -18,7 +18,7 @@ Timer.csの処理の流れ
 
 public class Timer : MonoBehaviour
 {
-    [SerializeField] private float CountTime = 40;
+    public float CountTime = 40;
     [SerializeField] private Image uiFill;
     [SerializeField] private TextMeshProUGUI uiText;
     private GameObject[] UiElements;

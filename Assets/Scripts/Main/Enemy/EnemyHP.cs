@@ -64,7 +64,6 @@ public class EnemyHP : MonoBehaviour
             hpSlider.value = (float)wkHP / (float)enemyHP;
             if (wkHP == 0)
             {
-                Debug.Log("Destroy");
                 Destroy(gameObject, 0f);
             }
             // Controller.isCollide = false;
