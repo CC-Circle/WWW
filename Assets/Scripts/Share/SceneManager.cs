@@ -23,8 +23,13 @@ public class MySceneManager : MonoBehaviour
         {
             Debug.Log("通過");
             flag = false;
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Desc");
 
+        }
+        else if (NowScene == "Desc" && flag)
+        {
+            flag = false;
+            SceneManager.LoadScene("Main");
         }
         else if (NowScene == "Main" && flag)
         {
@@ -45,7 +50,7 @@ public class MySceneManager : MonoBehaviour
         // 3: End
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            SceneManager.LoadScene("Start");
+            SceneManager.LoadScene("Desc");
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
