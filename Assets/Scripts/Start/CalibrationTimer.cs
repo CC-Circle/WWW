@@ -20,26 +20,23 @@ public class CalibrationTimer : MonoBehaviour
 {
     public float CountTime = 40;
     [SerializeField] private Image uiFill;
-    [SerializeField] private TextMeshProUGUI uiText;
     private float PauseCounter = 0;
     [SerializeField] private GameObject FinishText;
-
+    private GameObject[] UiElements;
 
     void Start()
     {
         FinishText.SetActive(false);
         MySceneManager.flag = false;
+        UiElements = GameObject.FindGameObjectsWithTag("UI");
     }
 
     void Update()
     {
         // 時間を減らす
         CountTime -= Time.deltaTime;
-        uiText.text = Mathf.FloorToInt(CountTime).ToString("F0");
         // FillのFillAmountを時間に応じて変化
         uiFill.fillAmount = Mathf.InverseLerp(0, 10, CountTime);
-
-        Debug.Log(PauseCounter);
 
 
         // CountTimeのみでも可能だが，可読性向上のために，PauseTimeを使って条件分岐
@@ -48,9 +45,23 @@ public class CalibrationTimer : MonoBehaviour
         {
 
             PauseCounter += Time.deltaTime; // 一時停止時間の計測開始
-            uiText.text = "";
 
             FinishText.SetActive(true);
+
+            foreach (GameObject UiElement in UiElements)
+            {
+                CanvasGroup canvasGroup = UiElement.GetComponent<CanvasGroup>();
+                if (canvasGroup == null)
+                {
+                    // CanvasGroupがアタッチされていない場合、追加する
+                    canvasGroup = UiElement.AddComponent<CanvasGroup>();
+                }
+                // UIの透明度を0にして、インタラクティブとレイキャストを無効化
+                // setActive(false)で実装すると，うまくいかなかったので，CanvasGroupを使って透明度を変更する方法を採用
+                canvasGroup.alpha = 0f;
+                canvasGroup.interactable = false;
+                canvasGroup.blocksRaycasts = false;
+            }
 
             // Flagを入手するためのコード
             SerialHandler SerialHandler; //呼ぶスクリプトにあだなつける
