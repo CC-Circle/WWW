@@ -1327,7 +1327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4834686903397086425, guid: 3d584ff7b44e7424e983daf61f87ffe7, type: 3}
       propertyPath: m_Name
-      value: Hatake 2
+      value: Hatake2
       objectReference: {fileID: 0}
     - target: {fileID: 4834686903397086425, guid: 3d584ff7b44e7424e983daf61f87ffe7, type: 3}
       propertyPath: m_IsActive
@@ -1827,7 +1827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf72ccdb399814b7986dcb8ae2add92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serialReceive: {fileID: 0}
 --- !u!114 &494555958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1903,7 +1902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4834686903397086425, guid: 81247c0366b6f46f2bbb9b53f0076c7f, type: 3}
       propertyPath: m_Name
-      value: Hatake 5
+      value: Hatake5
       objectReference: {fileID: 0}
     - target: {fileID: 4834686903397086425, guid: 81247c0366b6f46f2bbb9b53f0076c7f, type: 3}
       propertyPath: m_IsActive
@@ -2075,68 +2074,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3725748418564323957, guid: bb303efa784d1488ea3b9b4e8b2c21e8, type: 3}
   m_PrefabInstance: {fileID: 539180235}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &541873676
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1748139667}
-    m_Modifications:
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4834686903397086425, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-      propertyPath: m_Name
-      value: Hatake 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
---- !u!4 &541873677 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1494700616341039120, guid: 46e0b77e8ac6b4a059cfaca63b90a04e, type: 3}
-  m_PrefabInstance: {fileID: 541873676}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &554630926
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2265,7 +2202,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4834686903397086425, guid: 8e7e9f2c5e25f42d69c89b1763213567, type: 3}
       propertyPath: m_Name
-      value: Hatake 3
+      value: Hatake3
       objectReference: {fileID: 0}
     - target: {fileID: 4834686903397086425, guid: 8e7e9f2c5e25f42d69c89b1763213567, type: 3}
       propertyPath: m_IsActive
@@ -2438,7 +2375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf72ccdb399814b7986dcb8ae2add92d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serialReceive: {fileID: 0}
 --- !u!114 &674032829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8840,7 +8776,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4834686903397086425, guid: f016fd0a01c344a44937289e41abbcf1, type: 3}
       propertyPath: m_Name
-      value: Hatake 4
+      value: Hatake4
       objectReference: {fileID: 0}
     - target: {fileID: 4834686903397086425, guid: f016fd0a01c344a44937289e41abbcf1, type: 3}
       propertyPath: m_IsActive
@@ -8934,6 +8870,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3725748418564323957, guid: bb303efa784d1488ea3b9b4e8b2c21e8, type: 3}
   m_PrefabInstance: {fileID: 1269083821}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1269738770
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1748139667}
+    m_Modifications:
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4834686903397086425, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+      propertyPath: m_Name
+      value: Hatake1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
 --- !u!1001 &1313899663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9011,6 +9004,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4623244901304087397, guid: 3404c8a1cdad2470a967c2dcafb3196c, type: 3}
   m_PrefabInstance: {fileID: 1313899663}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1386820371 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1494700616341039120, guid: 0f26e9d2301f842ba8bed4863d6a085a, type: 3}
+  m_PrefabInstance: {fileID: 1269738770}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1431064689
 PrefabInstance:
@@ -10090,7 +10088,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 541873677}
+  - {fileID: 1386820371}
   - {fileID: 265267005}
   - {fileID: 582543446}
   - {fileID: 1148204598}

@@ -32,7 +32,7 @@ public class SerialReceive : MonoBehaviour
             if (flag == 1) // 左回転のフラグ
             {
                 left_count++;
-                if (left_count > 10)
+                if (left_count > 5)
                 {
                     Flag_view = 1;
                     left_count = 0;
@@ -41,7 +41,7 @@ public class SerialReceive : MonoBehaviour
             else if (flag == 2) // 右回転のフラグ
             {
                 right_count++;
-                if (right_count > 10)
+                if (right_count > 5)
                 {
                     Flag_view = 2;
                     right_count = 0;
@@ -50,7 +50,7 @@ public class SerialReceive : MonoBehaviour
             else if (flag == 0) // 停止のフラグ
             {
                 Flag_view = 0;
-            } 
+            }
             else if (flag == 10)
             {
                 Flag_button = 1;
