@@ -32,6 +32,7 @@ public class Timer : MonoBehaviour
     {
         UiElements = GameObject.FindGameObjectsWithTag("UI");
         FinishText.SetActive(false);
+        MySceneManager.flag = false;
     }
 
     void Update()

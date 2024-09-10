@@ -16,54 +16,23 @@ Timer.csの処理の流れ
 3. FinishText表示後に3秒経過すると，MySceneManager.flagをtrueにしてEndシーンに遷移
 */
 
-public class CalibrationTimer : MonoBehaviour
+public class Pause : MonoBehaviour
 {
-    public float CountTime = 10;
-    [SerializeField] private Image uiFill;
-    private float PauseCounter = 0;
-    [SerializeField] private GameObject FinishText;
-    private GameObject[] UiElements;
-    [SerializeField] private TextMeshProUGUI uiText;
+    [SerializeField] private float CountTime = 3;
 
     void Start()
     {
-        FinishText.SetActive(false);
         MySceneManager.flag = false;
-        UiElements = GameObject.FindGameObjectsWithTag("UI");
+
     }
 
     void Update()
     {
         // 時間を減らす
         CountTime -= Time.deltaTime;
-        // FillのFillAmountを時間に応じて変化
-        uiFill.fillAmount = Mathf.InverseLerp(0, 10, CountTime);
 
-
-        // CountTimeのみでも可能だが，可読性向上のために，PauseTimeを使って条件分岐
-        // Endシーンに遷移するための条件分岐
         if (CountTime <= 0)
         {
-
-            PauseCounter += Time.deltaTime; // 一時停止時間の計測開始
-
-            FinishText.SetActive(true);
-            uiText.text = "ボタンを押してスタート!!";
-
-            foreach (GameObject UiElement in UiElements)
-            {
-                CanvasGroup canvasGroup = UiElement.GetComponent<CanvasGroup>();
-                if (canvasGroup == null)
-                {
-                    // CanvasGroupがアタッチされていない場合、追加する
-                    canvasGroup = UiElement.AddComponent<CanvasGroup>();
-                }
-                // UIの透明度を0にして、インタラクティブとレイキャストを無効化
-                // setActive(false)で実装すると，うまくいかなかったので，CanvasGroupを使って透明度を変更する方法を採用
-                canvasGroup.alpha = 0f;
-                canvasGroup.interactable = false;
-                canvasGroup.blocksRaycasts = false;
-            }
 
             // Flagを入手するためのコード
             SerialHandler SerialHandler; //呼ぶスクリプトにあだなつける
@@ -91,6 +60,9 @@ public class CalibrationTimer : MonoBehaviour
                     MySceneManager.flag = true;
                 }
             }
+
         }
     }
+
+
 }
