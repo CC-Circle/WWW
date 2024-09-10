@@ -75,7 +75,7 @@ public class Controller : MonoBehaviour
                 }
                 else
                 {
-                    collider.enabled = false;
+                    // collider.enabled = false;
                     particle.Stop();
                 }
             }
@@ -100,7 +100,7 @@ public class Controller : MonoBehaviour
                 }
                 else
                 {
-                    collider.enabled = false;
+                    // collider.enabled = false;
                     particle.Stop();
                 }
 
@@ -117,14 +117,6 @@ public class Controller : MonoBehaviour
                 // 現在のマウス位置を次のフレーム用に保存
                 lastMousePosition = currentMousePosition;
             }
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("CloneEnemy") == true && other.gameObject.CompareTag("Enemy") == false)
-        {
-            isCollide = true;
         }
     }
 }
