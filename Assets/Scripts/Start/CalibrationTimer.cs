@@ -37,7 +37,7 @@ public class CalibrationTimer : MonoBehaviour
         // 時間を減らす
         CountTime -= Time.deltaTime;
         // FillのFillAmountを時間に応じて変化
-        uiFill.fillAmount = Mathf.InverseLerp(0, 5, CountTime);
+        uiFill.fillAmount = Mathf.InverseLerp(0, 8, CountTime);
 
 
         // CountTimeのみでも可能だが，可読性向上のために，PauseTimeを使って条件分岐

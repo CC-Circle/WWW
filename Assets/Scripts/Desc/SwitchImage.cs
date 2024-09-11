@@ -9,6 +9,8 @@ public class SwitchImage : MonoBehaviour
 
     void Start()
     {
+        images[0].SetActive(true);
+        images[1].SetActive(false);
 
     }
 
