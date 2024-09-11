@@ -1,13 +1,29 @@
 using UnityEngine;
 
+/// <summary>
+/// 指定したコライダー範囲内にオブジェクトの位置を制限するスクリプト。
+/// </summary>
 public class Area : MonoBehaviour
 {
-    public Collider areaCollider; // 範囲を示すコライダー
+    [SerializeField] private Collider areaCollider; // 範囲を示すコライダー
 
-    private Vector3 minBounds;
-    private Vector3 maxBounds;
+    private Vector3 minBounds; // 範囲の最小座標
+    private Vector3 maxBounds; // 範囲の最大座標
 
-    void Start()
+    private void Start()
+    {
+        InitializeBounds();
+    }
+
+    private void Update()
+    {
+        RestrictPositionWithinBounds(minBounds, maxBounds);
+    }
+
+    /// <summary>
+    /// コライダーから範囲の最小座標と最大座標を取得します。
+    /// </summary>
+    private void InitializeBounds()
     {
         if (areaCollider != null)
         {
@@ -17,17 +33,21 @@ public class Area : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Area Collider not assigned!");
+            Debug.LogError("Area Collider is not assigned!");
         }
     }
 
-    void Update()
+    /// <summary>
+    /// オブジェクトの位置を指定した範囲内に制限します。
+    /// </summary>
+    /// <param name="min">範囲の最小座標</param>
+    /// <param name="max">範囲の最大座標</param>
+    private void RestrictPositionWithinBounds(Vector3 min, Vector3 max)
     {
-        // プレイヤーの位置を制限
         Vector3 clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, minBounds.x, maxBounds.x);
-        clampedPosition.y = Mathf.Clamp(clampedPosition.y, minBounds.y, maxBounds.y);
-        clampedPosition.z = Mathf.Clamp(clampedPosition.z, minBounds.z, maxBounds.z);
+        clampedPosition.x = Mathf.Clamp(clampedPosition.x, min.x, max.x);
+        clampedPosition.y = Mathf.Clamp(clampedPosition.y, min.y, max.y);
+        clampedPosition.z = Mathf.Clamp(clampedPosition.z, min.z, max.z);
 
         transform.position = clampedPosition;
     }

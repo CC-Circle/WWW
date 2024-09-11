@@ -1,23 +1,34 @@
 using UnityEngine;
 using DG.Tweening;
 
+/// <summary>
+/// アイリスエフェクトの拡大縮小を管理するスクリプト。
+/// アイリスの拡大と縮小をアニメーションで制御します。
+/// </summary>
 public class IrisShot : MonoBehaviour
 {
-    [SerializeField] RectTransform unmask;
-    readonly Vector2 IRIS_IN_SCALE = new Vector2(30, 30);
-    readonly float SCALE_DURATION = 1;
+    [SerializeField] private RectTransform irisTransform; // アイリスのRectTransform
+    private readonly Vector2 expandedScale = new Vector2(30, 30); // 拡大時のスケール
+    private readonly float animationDuration = 1f; // アニメーションの持続時間
 
-    public void IrisIn()
+    /// <summary>
+    /// アイリスを拡大します。
+    /// </summary>
+    public void ExpandIris()
     {
-        unmask.DOScale(IRIS_IN_SCALE, SCALE_DURATION).SetEase(Ease.InCubic);
+        irisTransform.DOScale(expandedScale, animationDuration).SetEase(Ease.InCubic);
     }
 
-    public void IrisOut()
+    /// <summary>
+    /// アイリスを縮小します。
+    /// </summary>
+    public void ContractIris()
     {
-        unmask.DOScale(new Vector3(0, 0, 0), SCALE_DURATION).SetEase(Ease.OutCubic);
+        irisTransform.DOScale(Vector3.zero, animationDuration).SetEase(Ease.OutCubic);
     }
+
     private void Start()
     {
-        IrisIn();
+        ExpandIris();
     }
 }

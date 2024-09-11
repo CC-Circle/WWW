@@ -2,121 +2,130 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// プレイヤーの動きと操作を制御するスクリプト。センサー入力またはマウス操作によってプレイヤーを制御します。
+/// </summary>
 public class Controller : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 0.001f;
-    [SerializeField] private GameObject mainCamera;
-    public SerialReceive serialReceive;
-    public GameObject M5Stack;
-    public float distanceFromCamera = 5f; // カメラからの距離
-    private Vector3 lastMousePosition;
+    [SerializeField] private float movementSpeed = 0.001f; // プレイヤーの移動速度
+    [SerializeField] private GameObject rotationCenter; // プレイヤーが回転する中心オブジェクト
+    [SerializeField] private ParticleSystem movementParticles; // 移動時に再生されるパーティクルシステム
 
-    [SerializeField] private GameObject Kusakariki;
-    new SphereCollider collider;
-    public static bool isCollide = false;
+    private Vector3 lastMousePosition; // 前回のマウス位置
+    private float soundEffectInterval = 3f; // サウンドエフェクト再生間隔
+    private SphereCollider playerCollider; // プレイヤーのコライダー
 
-    private float SEInterval = 3f;
-
-    [SerializeField] private ParticleSystem particle;
-
-    void Start()
+    private void Start()
     {
         // 初期化時にマウスの位置を保存
         lastMousePosition = Input.mousePosition;
-        collider = GetComponent<SphereCollider>();
-        collider.enabled = false;
-        particle.Stop();
+        playerCollider = GetComponent<SphereCollider>();
+        playerCollider.enabled = false;
+        movementParticles.Stop();
     }
 
-    void Update()
+    private void Update()
     {
-        if (ShowStartText.flag)
+        // センサーまたはマウスによる操作を処理
+        SerialHandler serialHandler;
+        GameObject m5Stack = GameObject.Find("M5stack_Event"); // プレイヤーのオブジェクトを探す
+        serialHandler = m5Stack.GetComponent<SerialHandler>(); // SerialHandlerスクリプトを取得
+
+        SerialReceive serialReceive;
+        serialReceive = m5Stack.GetComponent<SerialReceive>(); // SerialReceiveスクリプトを取得
+
+        if (CountdownDisplay.flag)
         {
-            // Flagを入手するためのコード
-            SerialHandler SerialHandler; //呼ぶスクリプトにあだなつける
-            GameObject M5Stack = GameObject.Find("M5stack_Event"); //Playerっていうオブジェクトを探す
-            SerialHandler = M5Stack.GetComponent<SerialHandler>(); //付いているスクリプトを取得
-
-            // ジャイロを入手するためのコード
-            SerialReceive SerialReceive; //呼ぶスクリプトにあだなつける
-            SerialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
-
-            float rotationSpeed = 10f; // 回転速度
-
-            // M5Stack
-            if (SerialHandler.Settingsflag)
+            if (serialHandler.Settingsflag)
             {
-                if (SerialReceive.Flag_view == 1)
-                {
-                    //RotateAround(中心の場所,回転軸,回転角度)
-                    transform.RotateAround(Kusakariki.transform.position, Vector3.up, -0.5f);
-                }
-                else if (SerialReceive.Flag_view == 2)
-                {
-                    //RotateAround(中心の場所,回転軸,回転角度)
-                    transform.RotateAround(Kusakariki.transform.position, Vector3.up, 0.5f);
-                }
-
-                if (Input.GetKey(KeyCode.Space) || SerialReceive.Flag_button == 1)
-                {
-                    collider.enabled = true;
-                    transform.position += transform.forward * moveSpeed * 1000;
-                    // y軸の高さの固定
-                    transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
-                    particle.Play();
-
-                    if (Time.time > SEInterval)
-                    {
-                        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-                        soundManager.PlaySound(1);
-                        SEInterval = Time.time + 2f;
-                    }
-
-                }
-                else
-                {
-                    // collider.enabled = false;
-                    particle.Stop();
-                }
+                HandleSensorInput(serialHandler, serialReceive);
             }
-            //マウス
-            else if (!SerialHandler.Settingsflag)
+            else
             {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    collider.enabled = true;
-                    transform.position += transform.forward * moveSpeed * 1000;
-                    // y軸の高さの固定
-                    transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
-                    particle.Play();
-
-                    if (Time.time > SEInterval)
-                    {
-                        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-                        soundManager.PlaySound(1);
-                        SEInterval = Time.time + 2f;
-                    }
-
-                }
-                else
-                {
-                    // collider.enabled = false;
-                    particle.Stop();
-                }
-
-                // 十字キーでの進行方向変更（回転）
-                float h = Input.GetAxis("Horizontal"); // 左右キーの取得
-                transform.Rotate(0, rotationSpeed * h * 0.1f, 0);
-
-                // マウスのX方向の移動距離を計算
-                Vector3 currentMousePosition = Input.mousePosition;
-                float mouseDeltaX = currentMousePosition.x - lastMousePosition.x;
-
-                Kusakariki.transform.Rotate(0, mouseDeltaX * rotationSpeed * 0.005f, 0);
-
-                // 現在のマウス位置を次のフレーム用に保存
-                lastMousePosition = currentMousePosition;
+                HandleMouseInput();
             }
+        }
+    }
+
+    /// <summary>
+    /// センサー入力に基づいてプレイヤーの操作を処理します。
+    /// </summary>
+    /// <param name="serialHandler">SerialHandlerスクリプト</param>
+    /// <param name="serialReceive">SerialReceiveスクリプト</param>
+    private void HandleSensorInput(SerialHandler serialHandler, SerialReceive serialReceive)
+    {
+        if (serialReceive.Flag_view == 1)
+        {
+            // プレイヤーを左に回転
+            transform.RotateAround(rotationCenter.transform.position, Vector3.up, -0.5f);
+        }
+        else if (serialReceive.Flag_view == 2)
+        {
+            // プレイヤーを右に回転
+            transform.RotateAround(rotationCenter.transform.position, Vector3.up, 0.5f);
+        }
+
+        if (serialReceive.Flag_button == 1)
+        {
+            playerCollider.enabled = true;
+            transform.position += transform.forward * movementSpeed * 1000;
+            // y軸の高さの固定
+            transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+            movementParticles.Play();
+            PlaySoundEffect(1);
+        }
+        else
+        {
+            movementParticles.Stop();
+        }
+    }
+
+    /// <summary>
+    /// マウス入力に基づいてプレイヤーの操作を処理します。
+    /// </summary>
+    private void HandleMouseInput()
+    {
+        float rotationSpeed = 10f; // 回転速度
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            playerCollider.enabled = true;
+            transform.position += transform.forward * movementSpeed * 1000;
+            // y軸の高さの固定
+            transform.position = new Vector3(transform.position.x, 0.0f, transform.position.z);
+            movementParticles.Play();
+            PlaySoundEffect(1);
+        }
+        else
+        {
+            movementParticles.Stop();
+        }
+
+        // 十字キーでの回転
+        float horizontalInput = Input.GetAxis("Horizontal"); // 左右キーの取得
+        transform.Rotate(0, rotationSpeed * horizontalInput * 0.1f, 0);
+
+        // マウスのX方向の移動距離を計算
+        Vector3 currentMousePosition = Input.mousePosition;
+        float mouseDeltaX = currentMousePosition.x - lastMousePosition.x;
+
+        rotationCenter.transform.Rotate(0, mouseDeltaX * rotationSpeed * 0.005f, 0);
+
+        // 現在のマウス位置を次のフレーム用に保存
+        lastMousePosition = currentMousePosition;
+    }
+
+    /// <summary>
+    /// サウンドエフェクトを再生します。再生間隔に基づいて、連続再生を防ぎます。
+    /// </summary>
+    /// <param name="soundIndex">再生するサウンドのインデックス</param>
+    private void PlaySoundEffect(int soundIndex)
+    {
+        if (Time.time > soundEffectInterval)
+        {
+            SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+            soundManager.PlaySound(soundIndex);
+            soundEffectInterval = Time.time + 2f; // 次の再生までの時間を設定
         }
     }
 }

@@ -1,27 +1,49 @@
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// スカイボックスを回転させるスクリプト.
+/// </summary>
 public class RotateSkyBox : MonoBehaviour
 {
-
-    //　回転スピード
+    /// <summary>
+    /// スカイボックスの回転スピード.
+    /// </summary>
     [SerializeField] private float rotateSpeed = 0.5f;
-    //　スカイボックスのマテリアル
-    [SerializeField] private Material skyboxMaterial;
 
-    // Use this for initialization
+    /// <summary>
+    /// スカイボックスのマテリアル.
+    /// </summary>
+    private Material skyboxMaterial;
+
+    /// <summary>
+    /// スクリプトが開始されるときに呼び出される.
+    /// </summary>
     void Start()
     {
-        //　Lighting Settingsで指定したスカイボックスのマテリアルを取得
+        // Lighting Settingsで指定したスカイボックスのマテリアルを取得
         skyboxMaterial = RenderSettings.skybox;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// 毎フレーム呼び出される.
+    /// </summary>
     void Update()
     {
-        //　スカイボックスマテリアルのRotationを操作して角度を変化させる
-        skyboxMaterial.SetFloat("_Rotation", Mathf.Repeat(skyboxMaterial.GetFloat("_Rotation") + rotateSpeed * Time.deltaTime, 360f));
+        RotateSkybox();
+    }
+
+    /// <summary>
+    /// スカイボックスを回転させる.
+    /// </summary>
+    private void RotateSkybox()
+    {
+        // スカイボックスのマテリアルが設定されている場合のみ処理
+        if (skyboxMaterial != null)
+        {
+            // スカイボックスマテリアルのRotationを操作して角度を変化させる
+            float currentRotation = skyboxMaterial.GetFloat("_Rotation");
+            float newRotation = Mathf.Repeat(currentRotation + rotateSpeed * Time.deltaTime, 360f);
+            skyboxMaterial.SetFloat("_Rotation", newRotation);
+        }
     }
 }
