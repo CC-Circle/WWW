@@ -18,7 +18,7 @@ Timer.csの処理の流れ
 
 public class CalibrationTimer : MonoBehaviour
 {
-    public float CountTime = 10;
+    public float CountTime = 5;
     [SerializeField] private Image uiFill;
     private float PauseCounter = 0;
     [SerializeField] private GameObject FinishText;
@@ -37,7 +37,7 @@ public class CalibrationTimer : MonoBehaviour
         // 時間を減らす
         CountTime -= Time.deltaTime;
         // FillのFillAmountを時間に応じて変化
-        uiFill.fillAmount = Mathf.InverseLerp(0, 10, CountTime);
+        uiFill.fillAmount = Mathf.InverseLerp(0, 5, CountTime);
 
 
         // CountTimeのみでも可能だが，可読性向上のために，PauseTimeを使って条件分岐

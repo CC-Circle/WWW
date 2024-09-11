@@ -1724,7 +1724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3ee842f15c7941b294204c3c90f3a92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountTime: 10
+  CountTime: 5
   uiFill: {fileID: 1570877406}
   FinishText: {fileID: 1611481397}
   uiText: {fileID: 1831688400}
