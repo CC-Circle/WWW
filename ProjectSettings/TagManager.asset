@@ -9,6 +9,7 @@ TagManager:
   - Hatake
   - CloneEnemy
   - Overlap
+  - Healing
   layers:
   - Default
   - TransparentFX
