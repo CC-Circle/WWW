@@ -678,13 +678,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 670faaa1ef2b0451285ff8eabbab15c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.001
-  mainCamera: {fileID: 963194225}
-  serialReceive: {fileID: 0}
-  M5Stack: {fileID: 0}
-  distanceFromCamera: 5
-  Kusakariki: {fileID: 540815981}
-  particle: {fileID: 865928933}
+  movementSpeed: 0.001
+  rotationCenter: {fileID: 540815981}
+  movementParticles: {fileID: 865928933}
 --- !u!135 &170457409
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1212,9 +1208,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 290554897}
-  - component: {fileID: 290554899}
   - component: {fileID: 290554898}
   - component: {fileID: 290554900}
+  - component: {fileID: 290554901}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -1249,25 +1245,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e629d39915da34b248e34236bb49e3e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountTime: 40
-  uiFill: {fileID: 1973029450}
-  uiText: {fileID: 869481284}
-  PAUSE: 3
-  FinishText: {fileID: 1452512778}
---- !u!114 &290554899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 290554896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8190898b7402f492d800182871b4babd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TIME: 4
-  StartText: {fileID: 569084643}
+  timerFillImage: {fileID: 1973029450}
+  timerText: {fileID: 869481284}
+  pauseDuration: 3
+  finishTextObject: {fileID: 1452512778}
+  countTime: 40
 --- !u!114 &290554900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1280,7 +1262,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d42f989b07b472b82c5d7a6c44fa8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unmask: {fileID: 1411817576}
+  irisTransform: {fileID: 1404394015}
+--- !u!114 &290554901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 290554896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3adfb97e39924f75ae2528da56d9002, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  countdownDuration: 4
+  startText: Start!
+  countdownText: {fileID: 569084643}
 --- !u!1 &298737775
 GameObject:
   m_ObjectHideFlags: 3
@@ -3926,7 +3923,7 @@ GameObject:
   - component: {fileID: 886313786}
   m_Layer: 0
   m_Name: HatakeHP
-  m_TagString: Untagged
+  m_TagString: UI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4002,12 +3999,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77d2e7d364aa646f09e24c937cedf3c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthImage: {fileID: 905262975}
-  burnImage: {fileID: 830893941}
-  duration: 0.5
-  strength: 20
-  vibrate: 100
-  debugDamageRate: 0.1
+  healthBarImage: {fileID: 905262975}
+  burnEffectImage: {fileID: 830893941}
+  animationDuration: 0.5
+  shakeStrength: 20
+  shakeVibrations: 100
+  damageRate: 0.1
+  pauseDuration: 0
+  playShotSound: 1
 --- !u!1 &891258761
 GameObject:
   m_ObjectHideFlags: 0
@@ -5486,8 +5485,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5b2d05f9efe4b9face2503efd6549e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHP: 100
-  hpSlider: {fileID: 617537298}
+  maxHealth: 100
+  currentHealth: 0
+  healthSlider: {fileID: 617537298}
 --- !u!1001 &1107795906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7692,8 +7692,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be5b2d05f9efe4b9face2503efd6549e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHP: 100
-  hpSlider: {fileID: 1721490246}
+  maxHealth: 100
+  currentHealth: 0
+  healthSlider: {fileID: 1721490246}
 --- !u!135 &1481044788
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -4,22 +4,6 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    /// <summary>
-    /// スクリプトが開始された時に呼び出される初期化メソッドです。
-    /// </summary>
-    void Start()
-    {
-
-    }
-
-    /// <summary>
-    /// 毎フレーム呼び出される更新メソッドです。
-    /// </summary>
-    void Update()
-    {
-
-    }
-
     public void StartMoveEnemy(Vector3 targetPosition, float time)
     {
         StartCoroutine(MoveEnemy(targetPosition, time));

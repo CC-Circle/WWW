@@ -1,68 +1,55 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using UnityEngine.SceneManagement;
-using UnityEditor.Rendering;
-using UnityEditor.UIElements;
-using System.Media;
-using Unity.VisualScripting;
 
-/*
-Timer.csの処理の流れ
-1. ShowStartText.csからフラグを受け取りにTimerの計測開始
-2. ゲームスタート後に40秒経過すると，FinishTextを表示
-3. FinishText表示後に3秒経過すると，MySceneManager.flagをtrueにしてEndシーンに遷移
-*/
-
+/// <summary>
+/// 指定した時間が経過した後、シーン遷移の条件をチェックするスクリプト。
+/// </summary>
 public class Pause : MonoBehaviour
 {
-    [SerializeField] private float CountTime = 3;
+    [SerializeField] private float countdownDuration = 3f; // カウントダウンの時間
+    private float remainingTime; // 残り時間
 
+    /// <summary>
+    /// 初期化処理。フラグをリセットし、残り時間を設定します。
+    /// </summary>
     void Start()
     {
         MySceneManager.flag = false;
-
+        remainingTime = countdownDuration;
     }
 
+    /// <summary>
+    /// フレームごとの更新処理。カウントダウンを行い、時間が経過したらシーン遷移の条件をチェックします。
+    /// </summary>
     void Update()
     {
         // 時間を減らす
-        CountTime -= Time.deltaTime;
+        remainingTime -= Time.deltaTime;
 
-        if (CountTime <= 0)
+        if (remainingTime <= 0)
         {
+            // M5Stackオブジェクトの取得
+            GameObject m5Stack = GameObject.Find("M5stack_Event");
 
-            // Flagを入手するためのコード
-            SerialHandler SerialHandler; //呼ぶスクリプトにあだなつける
-            GameObject M5Stack = GameObject.Find("M5stack_Event"); //Playerっていうオブジェクトを探す
-            SerialHandler = M5Stack.GetComponent<SerialHandler>(); //付いているスクリプトを取得
+            // SerialHandlerとSerialReceiveコンポーネントの取得
+            SerialHandler serialHandler = m5Stack.GetComponent<SerialHandler>();
+            SerialReceive serialReceive = m5Stack.GetComponent<SerialReceive>();
 
-            SerialReceive serialReceive;
-            SerialReceive SerialReceive; //呼ぶスクリプトにあだなつける
-            SerialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
-
-            if (SerialHandler.Settingsflag)
-            {
-                // Flagを入手するためのコード
-                serialReceive = M5Stack.GetComponent<SerialReceive>(); //付いているスクリプトを取得
-
-                if (serialReceive.Flag_button == 1 || Input.GetKey(KeyCode.Space))
-                {
-                    MySceneManager.flag = true;
-                }
-            }
-            else
-            {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    MySceneManager.flag = true;
-                }
-            }
-
+            // シーン遷移の条件をチェック
+            CheckSceneTransition(serialHandler, serialReceive);
         }
     }
 
-
+    /// <summary>
+    /// シーン遷移の条件をチェックし、フラグを設定します。
+    /// </summary>
+    /// <param name="serialHandler">SerialHandlerコンポーネント</param>
+    /// <param name="serialReceive">SerialReceiveコンポーネント</param>
+    private void CheckSceneTransition(SerialHandler serialHandler, SerialReceive serialReceive)
+    {
+        // ボタンが押されたときやスペースキーが押されたときにフラグをセット
+        if (serialReceive.Flag_button == 1 || Input.GetKeyDown(KeyCode.Space))
+        {
+            MySceneManager.flag = true;
+        }
+    }
 }

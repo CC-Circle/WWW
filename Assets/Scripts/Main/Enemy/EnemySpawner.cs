@@ -37,11 +37,11 @@ public class EnemySpawner : MonoBehaviour
     void Update()
     {
         Timer TimerScript = GameObject.Find("UIManager").GetComponent<Timer>();
-        if (TimerScript.CountTime < 20)
+        if (TimerScript.countTime < 20)
         {
             spawnInterval = 3.0f;
         }
-        else if (TimerScript.CountTime < 10)
+        else if (TimerScript.countTime < 10)
         {
             spawnInterval = 1.0f;
         }
@@ -103,8 +103,6 @@ public class EnemySpawner : MonoBehaviour
 
             Enemy enemyScript = enemyObj.GetComponent<Enemy>();
             enemyScript.StartMoveEnemy(new Vector3(0, 0.5f, 0), arrivalTime);
-
-            // Debug.Log("Enemy Spowned Position: " + GetSpawnPosition());
         }
         else
         {
