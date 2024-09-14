@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class SingletonSample : MonoBehaviour
+public class DontDestroy : MonoBehaviour
 {
 
     public GameObject[] DontDestroyObjects;
 
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(gameObject);
     }
-
 }

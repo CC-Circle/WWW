@@ -1,72 +1,78 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 敵のHPを管理し、プレイヤーとの衝突に応じてHPを減少させるスクリプト。
+/// </summary>
 public class EnemyHP : MonoBehaviour
 {
+    [SerializeField] private int maxHealth = 100; // 敵の最大HP
+    [SerializeField] private int currentHealth; // 敵の現在のHP
+    [SerializeField] private Slider healthSlider; // HPを表示するスライダー
 
-    // 敵のヒットポイントを設定
-    public int enemyHP;
-    private int wkHP;
-
-    public Slider hpSlider;
-
-    // Use this for initialization
+    /// <summary>
+    /// ゲーム開始時にHPスライダーを初期化します。
+    /// </summary>
     void Start()
     {
-        hpSlider.value = (float)enemyHP;
-        wkHP = enemyHP;
+        currentHealth = maxHealth;
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// 毎フレーム実行され、HPスライダーの向きをカメラ方向に固定します。
+    /// </summary>
     void Update()
     {
         // スライダーの向きをカメラ方向に固定
-        hpSlider.transform.rotation = Camera.main.transform.rotation;
+        healthSlider.transform.rotation = Camera.main.transform.rotation;
     }
 
-    // 衝突した瞬間に呼ばれる 
+    /// <summary>
+    /// プレイヤーとの衝突時にHPを減少させ、HPがゼロになると敵を削除します。
+    /// </summary>
+    /// <param name="other">衝突したオブジェクトのコライダー</param>
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
-
-            SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-            soundManager.SetVolume(0.5f);
-            soundManager.PlaySound(2);
-
-
-            // あたった場合敵を削除
-            wkHP -= 50;
-            hpSlider.value = (float)wkHP / (float)enemyHP;
-            if (wkHP == 0)
-            {
-                Debug.Log("Destroy");
-                Destroy(gameObject, 0f);
-            }
-            // Controller.isCollide = false;
+            HandleDamage();
         }
     }
+
+    /// <summary>
+    /// プレイヤーとの衝突終了時にHPを減少させ、HPがゼロになると敵を削除します。
+    /// </summary>
+    /// <param name="other">衝突が終了したオブジェクトのコライダー</param>
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
+            HandleDamage();
+        }
+    }
 
-            SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-            soundManager.SetVolume(0.5f);
-            soundManager.PlaySound(2);
+    /// <summary>
+    /// 敵にダメージを与え、HPスライダーを更新します。
+    /// HPがゼロになると敵を削除します。
+    /// </summary>
+    private void HandleDamage()
+    {
+        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager.SetVolume(0.5f);
+        soundManager.PlaySound(2);
 
+        // HPを減少させる
+        currentHealth -= 50;
+        healthSlider.value = currentHealth;
 
-            // あたった場合敵を削除
-            wkHP -= 50;
-            hpSlider.value = (float)wkHP / (float)enemyHP;
-            if (wkHP == 0)
-            {
-                Destroy(gameObject, 0f);
-            }
-            // Controller.isCollide = false;
+        // HPがゼロまたはそれ以下になった場合、敵を削除
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -1,87 +1,112 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
-using UnityEditor.Rendering;
-using UnityEditor.UIElements;
-using System.Media;
-using Unity.VisualScripting;
 
-/*
-Timer.csの処理の流れ
-1. ShowStartText.csからフラグを受け取りにTimerの計測開始
-2. ゲームスタート後に40秒経過すると，FinishTextを表示
-3. FinishText表示後に3秒経過すると，MySceneManager.flagをtrueにしてEndシーンに遷移
-*/
-
+/// <summary>
+/// タイマーを管理し、カウントダウン、UIの更新、およびシーン遷移の処理を行うスクリプト。
+/// </summary>
 public class Timer : MonoBehaviour
 {
-    public float CountTime = 40;
-    [SerializeField] private Image uiFill;
-    [SerializeField] private TextMeshProUGUI uiText;
-    private GameObject[] UiElements;
-    private float PauseCounter = 0;
-    [SerializeField] private float PAUSE = 3;
-    [SerializeField] private GameObject FinishText;
+    [SerializeField] private Image timerFillImage; // タイマーの進捗を表示するUIイメージ
+    [SerializeField] private TextMeshProUGUI timerText; // タイマーの残り時間を表示するテキスト
+    [SerializeField] private float pauseDuration = 3f; // シーン遷移前に停止する時間
+    [SerializeField] private GameObject finishTextObject; // タイマー終了後に表示するテキストオブジェクト
 
-    private bool isShotSE = true;
+    private GameObject[] uiElements; // シーン内のUI要素
+    private float pauseCounter = 0f; // 一時停止の経過時間
 
-    void Start()
+    private bool hasPlayedFinishSound = true; // フィニッシュサウンドが再生済みかどうか
+    public float countTime = 40f; // カウントダウンの初期時間
+
+    private void Start()
     {
-        UiElements = GameObject.FindGameObjectsWithTag("UI");
-        FinishText.SetActive(false);
+        uiElements = GameObject.FindGameObjectsWithTag("UI");
+        finishTextObject.SetActive(false);
         MySceneManager.flag = false;
     }
 
-    void Update()
+    private void Update()
     {
-        if (ShowStartText.flag)
+        if (CountdownDisplay.flag)
         {
-            // 時間を減らす
-            CountTime -= Time.deltaTime;
-            uiText.text = Mathf.FloorToInt(CountTime).ToString("F0");
-            // FillのFillAmountを時間に応じて変化
-            uiFill.fillAmount = Mathf.InverseLerp(0, 40, CountTime);
+            UpdateTimer();
         }
 
-        // CountTimeのみでも可能だが，可読性向上のために，PauseTimeを使って条件分岐
-        // Endシーンに遷移するための条件分岐
-        if (PauseCounter >= PAUSE) MySceneManager.flag = true;
+        HandleSceneTransition();
 
-        // 処理2
-        //  40秒経過後にFinishTextを表示と一定時間（3秒）停止
-        if (CountTime <= 0)
+        if (countTime <= 0)
         {
-            PauseCounter += Time.deltaTime; // 一時停止時間の計測開始
+            pauseCounter += Time.deltaTime; // 一時停止時間の計測開始
 
-            foreach (GameObject UiElement in UiElements)
-            {
-                CanvasGroup canvasGroup = UiElement.GetComponent<CanvasGroup>();
-                if (canvasGroup == null)
-                {
-                    // CanvasGroupがアタッチされていない場合、追加する
-                    canvasGroup = UiElement.AddComponent<CanvasGroup>();
-                }
-                // UIの透明度を0にして、インタラクティブとレイキャストを無効化
-                // setActive(false)で実装すると，うまくいかなかったので，CanvasGroupを使って透明度を変更する方法を採用
-                canvasGroup.alpha = 0f;
-                canvasGroup.interactable = false;
-                canvasGroup.blocksRaycasts = false;
-            }
-            FinishText.SetActive(true);
+            HideUIElements();
 
-            // isShotSEがfalseの場合にOneShotSE()を実行
-            isShotSE = isShotSE ? true : false;
-            if (isShotSE) OneShotSE();
+            finishTextObject.SetActive(true);
+
+            PlayFinishSound();
         }
     }
 
-    private void OneShotSE()
+    /// <summary>
+    /// UI要素の透明度を変更し、インタラクティブ性とレイキャストを無効にします。
+    /// </summary>
+    private void HideUIElements()
+    {
+        foreach (GameObject uiElement in uiElements)
+        {
+            CanvasGroup canvasGroup = uiElement.GetComponent<CanvasGroup>();
+            if (canvasGroup == null)
+            {
+                // CanvasGroupがアタッチされていない場合、追加する
+                canvasGroup = uiElement.AddComponent<CanvasGroup>();
+            }
+            // UIの透明度を0にして、インタラクティブとレイキャストを無効化
+            canvasGroup.alpha = 0f;
+            canvasGroup.interactable = false;
+            canvasGroup.blocksRaycasts = false;
+        }
+    }
+
+    /// <summary>
+    /// 一時停止の経過時間をチェックし、必要に応じてシーン遷移のフラグを更新します。
+    /// </summary>
+    private void HandleSceneTransition()
+    {
+        if (pauseCounter >= pauseDuration)
+        {
+            MySceneManager.flag = true;
+        }
+    }
+
+    /// <summary>
+    /// タイマーを更新し、残り時間を表示します。
+    /// </summary>
+    private void UpdateTimer()
+    {
+        countTime -= Time.deltaTime;
+        timerText.text = Mathf.FloorToInt(countTime).ToString("F0");
+        timerFillImage.fillAmount = Mathf.InverseLerp(0, 40, countTime);
+    }
+
+    /// <summary>
+    /// タイマー終了時にフィニッシュサウンドを再生します。
+    /// </summary>
+    private void PlayFinishSound()
+    {
+        // フィニッシュサウンドが再生済みでない場合のみ実行
+        if (hasPlayedFinishSound)
+        {
+            PlaySound(5);
+        }
+    }
+
+    /// <summary>
+    /// 指定されたサウンドを再生します。
+    /// </summary>
+    /// <param name="soundIndex">再生するサウンドのインデックス</param>
+    private void PlaySound(int soundIndex)
     {
         SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-        soundManager.PlaySound(5);
-        isShotSE = false;
+        soundManager.PlaySound(soundIndex);
+        hasPlayedFinishSound = false;
     }
 }

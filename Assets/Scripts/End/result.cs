@@ -1,76 +1,81 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class result : MonoBehaviour
+/// <summary>
+/// ゲーム結果を表示し、指定された条件に基づいて画像を非表示にするスクリプト。
+/// </summary>
+public class Result : MonoBehaviour
 {
-    //resultのテキスト表示用変数
-    public TextMeshProUGUI resulttext;
+    [SerializeField] private TextMeshProUGUI resultText;
+    private readonly float[] score = { 0.25f, 0.5f, 0.75f, 0.9f };
+    private string[] hatakeNames = { "Hatake1", "Hatake2", "Hatake3", "Hatake4", "Hatake5" };
+    private int[][] hideCombinations = {
+        new int[] {1, 2, 3, 4},
+        new int[] {0, 2, 3, 4},
+        new int[] {0, 1, 3, 4},
+        new int[] {0, 1, 2, 4},
+        new int[] {0, 1, 2, 3}
+    };
+    private string[] resultMessages = {
+        "かんぺき!!", "いいかんじ!!", "がんばった!!", "もうすこし!!", "ぼどぼどや!!"
+    };
 
-    // Start is called before the first frame update
+
+    private int resultIndex = 0;
+
+    /// <summary>
+    /// ゲーム開始時に結果を評価し、適切な処理を実行します。
+    /// </summary>
     void Start()
     {
-        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
-        soundManager.PlaySound(0);
+        PlayShotSound(0);
+        JudgeResult();
+        SetTextAndObject(resultIndex);
 
-        // currentRateを調べて、畑と表示テキストを変更
-        if (HatakeHP.currentRate >= 0.9f)
+    }
+    /// <summary>
+    /// 指定されたサウンドインデックスのサウンドを再生します。
+    /// </summary>
+    /// <param name="soundIndex">再生するサウンドのインデックス</param>
+    private void PlayShotSound(int soundIndex)
+    {
+        SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+        soundManager.PlaySound(soundIndex);
+    }
+
+    private void JudgeResult()
+    {
+        if (HatakeHP.currentHealthRate >= score[3])
         {
-            // Debug.Log("通過1");
-            // currentRateを調べて、条件にあう畑以外を非表示に
-            GameObject.Find("Hatake2").SetActive(false);
-            GameObject.Find("Hatake3").SetActive(false);
-            GameObject.Find("Hatake4").SetActive(false);
-            GameObject.Find("Hatake5").SetActive(false);
-            //テキストの埋め込み
-            resulttext.text = "かんぺき!!";
+            resultIndex = 0;
         }
-        else if (HatakeHP.currentRate >= 0.75f)
+        else if (HatakeHP.currentHealthRate >= score[2])
         {
-            // Debug.Log("通過2");
-            GameObject.Find("Hatake1").SetActive(false);
-            GameObject.Find("Hatake3").SetActive(false);
-            GameObject.Find("Hatake4").SetActive(false);
-            GameObject.Find("Hatake5").SetActive(false);
-            //テキストの埋め込み
-            resulttext.text = "いいかんじ!!";
+            resultIndex = 1;
         }
-        else if (HatakeHP.currentRate >= 0.5f)
+        else if (HatakeHP.currentHealthRate >= score[1])
         {
-            // Debug.Log("通過3");
-            GameObject.Find("Hatake1").SetActive(false);
-            GameObject.Find("Hatake2").SetActive(false);
-            GameObject.Find("Hatake4").SetActive(false);
-            GameObject.Find("Hatake5").SetActive(false);
-            //テキストの埋め込み
-            resulttext.text = "がんばった!!";
+            resultIndex = 2;
         }
-        else if (HatakeHP.currentRate >= 0.25f)
+        else if (HatakeHP.currentHealthRate >= score[0])
         {
-            // Debug.Log("通過4");
-            GameObject.Find("Hatake1").SetActive(false);
-            GameObject.Find("Hatake2").SetActive(false);
-            GameObject.Find("Hatake3").SetActive(false);
-            GameObject.Find("Hatake5").SetActive(false);
-            //テキストの埋め込み
-            resulttext.text = "もうすこし!!";
+            resultIndex = 3;
         }
-        else if (HatakeHP.currentRate < 0.25f)
+        else
         {
-            // Debug.Log("通過5");
-            GameObject.Find("Hatake1").SetActive(false);
-            GameObject.Find("Hatake2").SetActive(false);
-            GameObject.Find("Hatake3").SetActive(false);
-            GameObject.Find("Hatake4").SetActive(false);
-            //テキストの埋め込み
-            resulttext.text = "ぼどぼどや!!";
+            resultIndex = 4;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void SetTextAndObject(int resultIndex)
     {
+        // 対応するオブジェクトを非表示にする
+        foreach (int index in hideCombinations[resultIndex])
+        {
+            GameObject.Find(hatakeNames[index]).SetActive(false);
+        }
 
+        // テキストの埋め込み
+        resultText.text = resultMessages[resultIndex];
     }
 }

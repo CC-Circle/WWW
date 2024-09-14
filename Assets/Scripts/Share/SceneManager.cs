@@ -1,53 +1,70 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-/*
-flagはTimer.csでtrueになる
-*/
-
+/// <summary>
+/// シーンの遷移を管理するスクリプト.
+/// </summary>
 public class MySceneManager : MonoBehaviour
 {
-    private string NowScene;
+    /// <summary>
+    /// 現在のシーン名.
+    /// </summary>
+    private string currentSceneName;
+
+    /// <summary>
+    /// シーン遷移をトリガーするフラグ.
+    /// </summary>
     public static bool flag;
 
+    /// <summary>
+    /// 毎フレーム呼び出され、シーンの遷移処理を実行する.
+    /// </summary>
     void Update()
     {
         // 現在のシーン名を取得
-        NowScene = SceneManager.GetActiveScene().name;
-        ForceChangeScene();
+        currentSceneName = SceneManager.GetActiveScene().name;
 
-        if (NowScene == "Start" && flag)
-        {
-            Debug.Log("通過");
-            flag = false;
-            SceneManager.LoadScene("Desc");
+        // キーボード入力によるシーン遷移を処理
+        HandleKeyboardInput();
 
-        }
-        else if (NowScene == "Desc" && flag)
-        {
-            flag = false;
-            SceneManager.LoadScene("Main");
-        }
-        else if (NowScene == "Main" && flag)
-        {
-            flag = false;
-            SceneManager.LoadScene("End");
-        }
-        else if (NowScene == "End" && flag)
-        {
-            flag = false;
-            SceneManager.LoadScene("Start");
-        }
+        // シーン遷移の条件をチェック
+        HandleSceneTransition();
     }
-    private void ForceChangeScene()
+
+    /// <summary>
+    /// シーン遷移の条件をチェックし、必要に応じてシーンをロードする.
+    /// </summary>
+    private void HandleSceneTransition()
     {
-        // キーボードでシーン遷移
-        // 1: Start
-        // 2: Main
-        // 3: End
+        // フラグが設定されていない場合は何もしない
+        if (!flag) return;
+
+        // 現在のシーンに応じて次のシーンをロード
+        switch (currentSceneName)
+        {
+            case "Start":
+                SceneManager.LoadScene("Desc");
+                break;
+            case "Desc":
+                SceneManager.LoadScene("Main");
+                break;
+            case "Main":
+                SceneManager.LoadScene("End");
+                break;
+            case "End":
+                SceneManager.LoadScene("Start");
+                break;
+        }
+
+        // フラグをリセット
+        flag = false;
+    }
+
+    /// <summary>
+    /// キーボード入力に基づいてシーンを遷移する.
+    /// </summary>
+    private void HandleKeyboardInput()
+    {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             SceneManager.LoadScene("Desc");
