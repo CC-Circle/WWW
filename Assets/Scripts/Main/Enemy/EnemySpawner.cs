@@ -77,6 +77,7 @@ public class EnemySpawner : MonoBehaviour
             z = Random.Range(-500.0f, 500.0f);
         } while (Mathf.Approximately(x, z));
 
+
         SetSpawnPosition(new Vector3(x, 0.5f, z));
     }
 
@@ -91,6 +92,11 @@ public class EnemySpawner : MonoBehaviour
             // enemyPrefabのうちランダムで選択
             GameObject enemyObj = Instantiate(enemyPrefab[Random.Range(0, enemyPrefab.Length)], GetSpawnPosition(), Quaternion.identity, parentObject);
             // GameObject enemyObj = Instantiate(enemyPrefab[0], GetSpawnPosition(), Quaternion.identity, parentObject);
+            if (enemyObj.name == "Kamemushi(Clone)")
+            {
+                // y座標を3fに設定
+                enemyObj.transform.position = new Vector3(enemyObj.transform.position.x, 18.0f, enemyObj.transform.position.z);
+            }
             // cloneオブジェクト用のを設定
             enemyObj.tag = "CloneEnemy";
             // レイヤーの設定
@@ -102,7 +108,14 @@ public class EnemySpawner : MonoBehaviour
             enemyObj.layer = LayerIgnoreRaycast;
 
             Enemy enemyScript = enemyObj.GetComponent<Enemy>();
-            enemyScript.StartMoveEnemy(new Vector3(0, 0.5f, 0), arrivalTime);
+            if (enemyObj.name == "Kamemushi(Clone)")
+            {
+                enemyScript.StartMoveEnemy(new Vector3(0, 18.0f, 0), arrivalTime);
+            }
+            else
+            {
+                enemyScript.StartMoveEnemy(new Vector3(0, 0.5f, 0), arrivalTime);
+            }
         }
         else
         {
