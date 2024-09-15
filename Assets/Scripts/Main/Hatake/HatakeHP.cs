@@ -27,8 +27,10 @@ public class HatakeHP : MonoBehaviour
 
     private void Update()
     {
+        Healings();
         HandleCollision();
         CheckHealthStatus();
+
     }
 
     /// <summary>
@@ -106,5 +108,27 @@ public class HatakeHP : MonoBehaviour
         SoundManager soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
         soundManager.PlaySound(soundIndex);
         playShotSound = false;
+    }
+
+    private void Healings()
+    {
+        if (GameObject.Find("Healing(Clone)") == null)
+        {
+            return;
+        }
+        else
+        {
+            Item ItemScripts = GameObject.Find("Healing(Clone)").GetComponent<Item>();
+            if (ItemScripts.isHealing)
+            {
+                if (currentHealthRate < 1)
+                {
+                    UpdateHealthBar(currentHealthRate + 0.05f);
+                }
+                // なんかちゃんと消えない時もある
+                // なのでItemSpawner.csで強制的に消す処理を追加した
+                Destroy(GameObject.Find("Healing(Clone)"));
+            }
+        }
     }
 }
