@@ -32,8 +32,7 @@ int left_flag = 0;
 int center_flag = 1;  // 0:HIGH 1:LOW
 
 // ホールセンサーのフラッグ
-bool status = digitalRead(HALL);
-bool last_status = false;
+bool last_status = 1;
 
 void calibration() {
   delay(1000);  // キャリブレーション時間を1秒に設定
@@ -107,8 +106,11 @@ void ResetGyro() {
 }
 
 bool getIsHoll() {
+  // HALLセンサーの取得（HIGH:0,LOW:1）
+  bool status = digitalRead(HALL);
   bool isHoll = false;
-
+  
+  // 前がLOWでHIGHになればTRUE
   if (status != last_status) {
     if (status == 0) {
       isHoll = true;
@@ -135,6 +137,7 @@ void Main() {
     M5.Lcd.setCursor(220, 210);
     M5.Lcd.printf("RESET");
 
+    // hollセンサーの判定
     if (getIsHoll()) {
       Serial.println(10);
     } else {
