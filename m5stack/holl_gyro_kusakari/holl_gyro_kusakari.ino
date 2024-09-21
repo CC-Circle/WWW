@@ -1,12 +1,15 @@
 #define M5STACK_MPU6886
+#define HALL 36
 #define CALIBCOUNT 5000
 
 #include <M5Stack.h>
 
+// 加速度
 float accX = 0.0F;
 float accY = 0.0F;
 float accZ = 0.0F;
 
+// ジャイロ
 float gyroX = 0.0F;
 float gyroY = 0.0F;
 float gyroZ = 0.0F;
@@ -28,12 +31,9 @@ int right_flag = 0;
 int left_flag = 0;
 int center_flag = 1;  // 0:HIGH 1:LOW
 
-// ボタンのフラッグ
-int Button_flag = 0;
-int last_value_red = 0;
-int cur_value_red = 0;
-int last_value_blue = 0;
-int cur_value_blue = 0;
+// ホールセンサーのフラッグ
+bool status = digitalRead(HALL);
+bool last_status = false;
 
 void calibration() {
   delay(1000);  // キャリブレーション時間を1秒に設定
@@ -106,16 +106,16 @@ void ResetGyro() {
   M5.Lcd.clear();
 }
 
-bool getIsButton() {
-  bool isButton = false;
+bool getIsHoll() {
+  bool isHoll = false;
 
-  if (cur_value_blue != last_value_blue || cur_value_red != last_value_red) {
-    if (cur_value_blue == 0 || cur_value_red == 0) {
-      isButton = true;
+  if (status != last_status) {
+    if (status == 0) {
+      isHoll = true;
     }
   }
 
-  return isButton;
+  return isHoll;
 }
 
 void Main() {
@@ -129,17 +129,13 @@ void Main() {
   while (true) {
     M5.update();
 
-    // ボタンの状態を取得
-    cur_value_red = digitalRead(26);
-    cur_value_blue = digitalRead(36);
-
     // ボタンの操作内容の表示
     M5.Lcd.setCursor(50, 210);
     M5.Lcd.printf("CAL");
     M5.Lcd.setCursor(220, 210);
     M5.Lcd.printf("RESET");
 
-    if (getIsButton()) {
+    if (getIsHoll()) {
       Serial.println(10);
     } else {
       Serial.println(-1);
@@ -189,9 +185,8 @@ void setup() {
 
   M5.IMU.Init();
 
-  // ボタンのピン設定
-  pinMode(26, INPUT);
-  pinMode(36, INPUT);
+  // ホールセンサーのピン設定
+  pinMode(HALL, INPUT);
 
   M5.Lcd.fillScreen(BLACK);
   M5.Lcd.setTextColor(WHITE, BLACK);
