@@ -18,6 +18,12 @@ public class BossHP : MonoBehaviour
     {
         // ゆっくりと下に沈む
         transform.Translate(Vector3.down * Time.deltaTime * 100);
+
+        if (transform.position.y < -300)
+        {
+            MySceneManager.flag = true;
+        }
+
     }
 
     void Update()
