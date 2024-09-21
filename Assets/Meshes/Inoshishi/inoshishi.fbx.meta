@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e5ccfd71b8c7146d585373a5e6af85ea
+guid: 6580d4036b6f344939c584c375048e10
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,11 +33,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Attack"
-      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Attack"
-      internalID: 6396828155121186910
+      name: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Action"
+      takeName: "\u30A2\u30FC\u30DE\u30C1\u30E5\u30A2|Action"
+      internalID: 7583080319782976921
       firstFrame: 0
-      lastFrame: 72
+      lastFrame: 30
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -72,8 +72,8 @@ ModelImporter:
     importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 0
-    importLights: 0
+    importCameras: 1
+    importLights: 1
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0

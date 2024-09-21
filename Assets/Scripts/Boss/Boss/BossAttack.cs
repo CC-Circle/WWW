@@ -28,8 +28,14 @@ public class BossAttack : MonoBehaviour
 
     void Update()
     {
+
         CheckHealthStatus();
-        Attack();
+
+        BossHP BossHPScript = GameObject.Find("Boss").GetComponent<BossHP>();
+        if (BossHPScript.maxHealth > 0)
+        {
+            Attack();
+        }
     }
 
     private void GetHPAndHealing()
