@@ -90,6 +90,7 @@ public class Timer : MonoBehaviour
 
     /// <summary>
     /// タイマー終了時にフィニッシュサウンドを再生します。
+    /// (追加)warning発生
     /// </summary>
     private void PlayFinishSound()
     {
