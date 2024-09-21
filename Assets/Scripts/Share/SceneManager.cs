@@ -49,6 +49,9 @@ public class MySceneManager : MonoBehaviour
                 SceneManager.LoadScene("Main");
                 break;
             case "Main":
+                SceneManager.LoadScene("Boss");
+                break;
+            case "Boss":
                 SceneManager.LoadScene("End");
                 break;
             case "End":

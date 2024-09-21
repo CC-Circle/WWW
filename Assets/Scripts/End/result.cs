@@ -45,19 +45,19 @@ public class Result : MonoBehaviour
 
     private void JudgeResult()
     {
-        if (HatakeHP.currentHealthRate >= score[3])
+        if (BossAttack.currentHealthRate >= score[3])
         {
             resultIndex = 0;
         }
-        else if (HatakeHP.currentHealthRate >= score[2])
+        else if (BossAttack.currentHealthRate >= score[2])
         {
             resultIndex = 1;
         }
-        else if (HatakeHP.currentHealthRate >= score[1])
+        else if (BossAttack.currentHealthRate >= score[1])
         {
             resultIndex = 2;
         }
-        else if (HatakeHP.currentHealthRate >= score[0])
+        else if (BossAttack.currentHealthRate >= score[0])
         {
             resultIndex = 3;
         }
