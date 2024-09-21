@@ -891,6 +891,7 @@ GameObject:
   - component: {fileID: 122977233}
   - component: {fileID: 122977236}
   - component: {fileID: 122977234}
+  - component: {fileID: 122977237}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -966,6 +967,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &122977237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122977232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f579ababd4c6f4b638e14b5dc8ded1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 0.001
+  rotationCenter: {fileID: 733171291}
 --- !u!1001 &201897893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2180,6 +2195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 440989053}
+  - component: {fileID: 440989054}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -2203,6 +2219,19 @@ Transform:
   - {fileID: 720678133}
   m_Father: {fileID: 845408682}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &440989054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440989052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d616d70256cb410983abe8f209eb4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 30
 --- !u!1001 &527011121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2912,7 +2941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8909072806331755113, guid: a1af1265f017f4f81a41c861788733bd, type: 3}
       propertyPath: m_Name
-      value: Boss
+      value: BossPrefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

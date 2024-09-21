@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// プレイヤーの動きと操作を制御するスクリプト。センサー入力またはマウス操作によってプレイヤーを制御します。
 /// </summary>
-public class Controller : MonoBehaviour
+public class Main_Controller : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 0.001f; // プレイヤーの移動速度
     [SerializeField] private GameObject rotationCenter; // プレイヤーが回転する中心オブジェクト
