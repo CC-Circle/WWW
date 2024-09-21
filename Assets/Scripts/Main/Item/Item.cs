@@ -8,7 +8,6 @@ public class Item : MonoBehaviour
 
     void Update()
     {
-        TimeUpDestroy();
     }
 
 
@@ -17,15 +16,6 @@ public class Item : MonoBehaviour
         if (gameObject.tag == "Healing" && other.gameObject.tag == "Player")
         {
             isHealing = true;
-        }
-    }
-
-    void TimeUpDestroy()
-    {
-        Timer TimerScript = GameObject.Find("UIManager").GetComponent<Timer>();
-        if (TimerScript.countTime <= 0)
-        {
-            Destroy(gameObject);
         }
     }
 }

@@ -23,6 +23,7 @@ public class HatakeHP : MonoBehaviour
     private void Start()
     {
         UpdateHealthBar(1f);
+
     }
 
     private void Update()
@@ -31,6 +32,7 @@ public class HatakeHP : MonoBehaviour
         HandleCollision();
         CheckHealthStatus();
 
+        if (GetTimer() <= 0) SaveHP();
     }
 
     /// <summary>
@@ -130,5 +132,16 @@ public class HatakeHP : MonoBehaviour
                 Destroy(GameObject.Find("Healing(Clone)"));
             }
         }
+    }
+
+    private float GetTimer()
+    {
+        Timer TimerScripts = GameObject.Find("UIManager").GetComponent<Timer>();
+        return TimerScripts.countTime;
+    }
+
+    private void SaveHP()
+    {
+        PlayerPrefs.SetFloat("HP", currentHealthRate);
     }
 }
