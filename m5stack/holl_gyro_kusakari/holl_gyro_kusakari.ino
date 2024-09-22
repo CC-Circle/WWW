@@ -153,19 +153,19 @@ void Main() {
     M5.Lcd.printf("%4.0f", yaw);
 
     // 左の判定
-    if (yaw < -60) {
+    if (yaw < -40) {
       left_flag = 1;
       Serial.println(left_flag);
     }
 
     // 右の判定
-    if (yaw > 60) {
+    if (yaw > 40) {
       right_flag = 2;
       Serial.println(right_flag);
     }
 
     // 真ん中
-    if ((yaw >= 0 && yaw < 20) || (yaw <= 0 && yaw > -20)) {
+    if ((yaw >= 0 && yaw < 10) || (yaw <= 0 && yaw > -10)) {
       center_flag = 0;
       Serial.println(center_flag);
     }
