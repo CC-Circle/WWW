@@ -83,9 +83,6 @@ public class Boss_Controller : MonoBehaviour
                 last_sencer_flag = 1;
             }
         }
-
-        Debug.Log("Flag_view" + serialReceive.Flag_view);
-        Debug.Log("last_sencer_flag" + last_sencer_flag);
     }
 
     /// <summary>
