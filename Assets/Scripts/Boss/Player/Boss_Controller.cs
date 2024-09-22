@@ -14,8 +14,6 @@ public class Boss_Controller : MonoBehaviour
     private int last_sencer_flag = 0; // 前回のセンサーフラグ
     private float soundEffectInterval = 3f; // サウンドエフェクト再生間隔
     private bool isMove = false;
-    private float currentRotation = 0.0f; // 現在の回転角度
-    private float targetAngle = 30.0f; // 目標の角度
 
     private void Start()
     {
@@ -59,7 +57,12 @@ public class Boss_Controller : MonoBehaviour
             if (serialReceive.Flag_view == 2)
             {
                 // プレイヤーを右に回転
-                transform.RotateAround(rotationCenter.transform.position, Vector3.up, 2.0f);
+                transform.RotateAround(rotationCenter.transform.position, Vector3.up, 10.0f);
+                // 横振りの判定
+                if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
+                {
+                    BossHPScript.TakeDamage(1);
+                }
                 // センサーのフラグ保存
                 last_sencer_flag = 2;
             }
@@ -70,19 +73,19 @@ public class Boss_Controller : MonoBehaviour
             if (serialReceive.Flag_view == 1)
             {
                 // プレイヤーを左に回転
-                transform.RotateAround(rotationCenter.transform.position, Vector3.up, -2.0f);
+                transform.RotateAround(rotationCenter.transform.position, Vector3.up, -10.0f);
+                // 横振りの判定
+                if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
+                {
+                    BossHPScript.TakeDamage(1);
+                }
                 // センサーのフラグ保存
                 last_sencer_flag = 1;
             }
         }
 
-        // 横振りの判定
-        if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
-        {
-            BossHPScript.TakeDamage(1);
-        }
-
-        Debug.Log(transform.position.x);
+        Debug.Log("Flag_view" + serialReceive.Flag_view);
+        Debug.Log("last_sencer_flag" + last_sencer_flag);
     }
 
     /// <summary>
