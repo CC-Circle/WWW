@@ -10,10 +10,10 @@ using TMPro;
 public class warningText : MonoBehaviour
 
 {
-    public TextMeshProUGUI Blinking;
-    public Image image;
-    private int Flag;
+    [SerializeField] private TextMeshProUGUI Blinking;
+    [SerializeField] private Image image;
     [SerializeField] private TextMeshProUGUI warning;
+    private int Flag;
     
     // Start is called before the first frame update
     void Start()
