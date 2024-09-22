@@ -9,8 +9,9 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] private Image timerFillImage; // タイマーの進捗を表示するUIイメージ
     [SerializeField] private TextMeshProUGUI timerText; // タイマーの残り時間を表示するテキスト
-    [SerializeField] private float pauseDuration = 3f; // シーン遷移前に停止する時間
+    [SerializeField] private float pauseDuration = 10f; // シーン遷移前に停止する時間
     [SerializeField] private GameObject finishTextObject; // タイマー終了後に表示するテキストオブジェクト
+    [SerializeField] private GameObject warningObject;  // warning用
 
     private GameObject[] uiElements; // シーン内のUI要素
     private float pauseCounter = 0f; // 一時停止の経過時間
@@ -89,9 +90,17 @@ public class Timer : MonoBehaviour
 
     /// <summary>
     /// タイマー終了時にフィニッシュサウンドを再生します。
+    /// (追加)warning発生
     /// </summary>
     private void PlayFinishSound()
     {
+        warningText warningTextScript = warningObject.GetComponent<warningText>();
+
+        if (warningTextScript != null)
+        {
+            // スクリプトを有効化
+            warningTextScript.enabled = true;
+        }
         // フィニッシュサウンドが再生済みでない場合のみ実行
         if (hasPlayedFinishSound)
         {
