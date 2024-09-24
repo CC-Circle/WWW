@@ -31,5 +31,6 @@ public class BossAppear : MonoBehaviour
 
         mainCamera.depth = 1;
         BossShotCamera.depth = -1;
+        ParticleSystem.Play();
     }
 }
