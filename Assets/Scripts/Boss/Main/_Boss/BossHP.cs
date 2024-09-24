@@ -28,7 +28,7 @@ public class BossHP : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(maxHealth);
+        // Debug.Log(maxHealth);
         if (maxHealth <= 0)
         {
             Die();
