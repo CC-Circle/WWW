@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5602769, g: 0.7210944, b: 0.8176016, a: 1}
+  m_IndirectSpecularColor: {r: 0.42938662, g: 0.5531525, b: 0.627897, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -580,7 +580,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 0.5
-  skyboxMaterial: {fileID: 2100000, guid: 55e64e617a8bfff4ba846574e2651eb9, type: 2}
 --- !u!1 &625312748
 GameObject:
   m_ObjectHideFlags: 0
@@ -2318,7 +2317,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30AD\u30E3\u30EA\u30D6\u30EC\u30FC\u30B7\u30E7\u30F3\u4E2D"
+  m_text: "\u30B3\u30F3\u30C8\u30ED\u30FC\u30E9\u30FC\u3092\u304A\u3044\u3066\u304F\u3060\u3055\u3044"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
   m_sharedMaterial: {fileID: 462649656502465482, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
@@ -2407,7 +2406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2cdf82aeed754e75a2e12adf24c595b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  blinkSpeed: 1
+  textMeshPro: {fileID: 0}
 --- !u!1 &1890167438
 GameObject:
   m_ObjectHideFlags: 0

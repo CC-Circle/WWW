@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0784bdc0f796a4cdb9f37ea2dacdbfc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CountTime: 3
+  countdownDuration: 8
 --- !u!1001 &72605636
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -615,7 +615,7 @@ MonoBehaviour:
   imageObjects:
   - {fileID: 228846469}
   - {fileID: 2079361017}
-  switchDelay: 3
+  switchDelay: 8
 --- !u!1 &625312748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1089,7 +1089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2cdf82aeed754e75a2e12adf24c595b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  blinkSpeed: 1
+  textMeshPro: {fileID: 0}
 --- !u!114 &928074626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2110,7 +2111,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 0.5
-  skyboxMaterial: {fileID: 2100000, guid: 55e64e617a8bfff4ba846574e2651eb9, type: 2}
 --- !u!1 &2079361017
 GameObject:
   m_ObjectHideFlags: 0
