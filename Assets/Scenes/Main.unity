@@ -1463,7 +1463,7 @@ MonoBehaviour:
   pauseDuration: 10
   finishTextObject: {fileID: 1452512778}
   warningObject: {fileID: 1014572487}
-  countTime: 40
+  countTime: 15
 --- !u!114 &290554900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5550,8 +5550,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6f6c0d7c9a7b548419fbfd90cc018fba, type: 2}
-  m_sharedMaterial: {fileID: 462649656502465482, guid: 6f6c0d7c9a7b548419fbfd90cc018fba, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8096,6 +8096,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb9714b62a114d45b65f30fc946ea5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TargetUnmask: {fileID: 0}
 --- !u!114 &1404394017
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8197,6 +8198,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f752d3a51152f4e44a3ebe45ae24abcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_FitTarget: {fileID: 0}
+  m_FitOnLateUpdate: 0
+  m_OnlyForChildren: 0
+  m_ShowUnmaskGraphic: 0
+  m_EdgeSmoothing: 0
 --- !u!114 &1411817578
 MonoBehaviour:
   m_ObjectHideFlags: 0

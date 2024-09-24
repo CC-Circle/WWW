@@ -42,8 +42,8 @@ public class Timer : MonoBehaviour
             HideUIElements();
 
             finishTextObject.SetActive(true);
-
             PlayFinishSound();
+            Warinig();
         }
     }
 
@@ -94,17 +94,26 @@ public class Timer : MonoBehaviour
     /// </summary>
     private void PlayFinishSound()
     {
-        warningText warningTextScript = warningObject.GetComponent<warningText>();
-
-        if (warningTextScript != null)
-        {
-            // スクリプトを有効化
-            warningTextScript.enabled = true;
-        }
         // フィニッシュサウンドが再生済みでない場合のみ実行
         if (hasPlayedFinishSound)
         {
             PlaySound(5);
+        }
+    }
+
+    private void Warinig()
+    {
+        warningText warningTextScript = warningObject.GetComponent<warningText>();
+        int delay = -3;
+        if (countTime <= delay)
+        {
+            finishTextObject.SetActive(false);
+
+            if (warningTextScript != null)
+            {
+                // スクリプトを有効化
+                warningTextScript.enabled = true;
+            }
         }
     }
 
