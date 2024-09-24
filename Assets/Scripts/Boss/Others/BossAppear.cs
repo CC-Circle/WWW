@@ -8,6 +8,7 @@ public class BossAppear : MonoBehaviour
     [SerializeField] private Canvas canvas_2;
     [SerializeField] private Camera mainCamera;
     [SerializeField] private Camera BossShotCamera;
+    [SerializeField] private ParticleSystem ParticleSystem;
 
 
 
@@ -18,6 +19,8 @@ public class BossAppear : MonoBehaviour
 
         mainCamera.depth = -1;
         BossShotCamera.depth = 1;
+        ParticleSystem.Stop();
+
     }
 
 
