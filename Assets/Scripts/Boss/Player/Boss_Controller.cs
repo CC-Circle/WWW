@@ -11,6 +11,7 @@ public class Boss_Controller : MonoBehaviour
     [SerializeField] private GameObject rotationCenter; // プレイヤーが回転する中心オブジェクト
 
     private Vector3 lastMousePosition; // 前回のマウス位置
+    private int last_sencer_flag = 0; // 前回のセンサーフラグ
     private float soundEffectInterval = 3f; // サウンドエフェクト再生間隔
     private bool isMove = false;
 
@@ -47,7 +48,41 @@ public class Boss_Controller : MonoBehaviour
     /// <param name="serialReceive">SerialReceiveスクリプト</param>
     private void HandleSensorInput(SerialHandler serialHandler, SerialReceive serialReceive)
     {
+        // BossHPスクリプトを取得
+        BossHP BossHPScript = GameObject.Find("Boss").GetComponent<BossHP>();
 
+        // 一周しないように回転角度を制限
+        if (transform.position.x < 10.0f)
+        {
+            if (serialReceive.Flag_view == 2)
+            {
+                // プレイヤーを右に回転
+                transform.RotateAround(rotationCenter.transform.position, Vector3.up, 10.0f);
+                // 横振りの判定
+                if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
+                {
+                    BossHPScript.TakeDamage(1);
+                }
+                // センサーのフラグ保存
+                last_sencer_flag = 2;
+            }
+        }
+
+        if (transform.position.x > -10.0f)
+        {
+            if (serialReceive.Flag_view == 1)
+            {
+                // プレイヤーを左に回転
+                transform.RotateAround(rotationCenter.transform.position, Vector3.up, -10.0f);
+                // 横振りの判定
+                if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
+                {
+                    BossHPScript.TakeDamage(1);
+                }
+                // センサーのフラグ保存
+                last_sencer_flag = 1;
+            }
+        }
     }
 
     /// <summary>
