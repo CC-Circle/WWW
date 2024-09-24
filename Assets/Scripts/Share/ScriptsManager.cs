@@ -36,7 +36,6 @@ public class ScriptsManager : MonoBehaviour
         {
             delayTime = 5;
             time += Time.deltaTime;
-            Debug.Log(time);
 
             if (time < delayTime)
             {
