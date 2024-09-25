@@ -3613,6 +3613,8 @@ GameObject:
   - component: {fileID: 837543965}
   - component: {fileID: 837543967}
   - component: {fileID: 837543966}
+  - component: {fileID: 837543968}
+  - component: {fileID: 837543969}
   m_Layer: 0
   m_Name: Camera_1
   m_TagString: Untagged
@@ -3694,6 +3696,118 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &837543968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837543964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9de9d7360a0c4182bd241cf02081a36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shakeDuration: 0.5
+  shakeMagnitude: 3
+  delayBeforeShake: 2.5
+  audioSource: {fileID: 837543969}
+--- !u!82 &837543969
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837543964}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 7e4cf498463964e5c8fa14e7a98f262a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &845408681
 GameObject:
   m_ObjectHideFlags: 0
@@ -6143,6 +6257,7 @@ MonoBehaviour:
   pauseDuration: 0
   attackTimer: 0
   playShotSound: 1
+  cameraObject: {fileID: 837543964}
 --- !u!1001 &1597758659
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6622,8 +6737,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30DC\u30B9\u30E2\u30B0\u30E9\u304C\u73FE\u308C\u305F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
-  m_sharedMaterial: {fileID: 462649656502465482, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
+  m_sharedMaterial: {fileID: 462649656502465482, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7508,8 +7623,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u632F\u308C\uFF01\uFF01"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
-  m_sharedMaterial: {fileID: 462649656502465482, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
+  m_sharedMaterial: {fileID: 462649656502465482, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
