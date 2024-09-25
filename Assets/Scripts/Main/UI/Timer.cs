@@ -103,16 +103,22 @@ public class Timer : MonoBehaviour
 
     private void Warinig()
     {
+        // warningObjectは親オブジェクト (warningオブジェクト) に対応
         warningText warningTextScript = warningObject.GetComponent<warningText>();
         int delay = -3;
+        
         if (countTime <= delay)
         {
             finishTextObject.SetActive(false);
 
             if (warningTextScript != null)
             {
-                // スクリプトを有効化
+                // warningTextスクリプトを有効化
                 warningTextScript.enabled = true;
+            }
+            else
+            {
+                Debug.LogError("warningTextスクリプトが見つかりません。親オブジェクトにアタッチされているか確認してください。");
             }
         }
     }
