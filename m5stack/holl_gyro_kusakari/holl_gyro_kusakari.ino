@@ -35,7 +35,7 @@ int center_flag = 1;  // 0:HIGH 1:LOW
 bool last_status = 1;
 
 void calibration() {
-  delay(1000);  // キャリブレーション時間を1秒に設定
+  delay(500);  // キャリブレーション時間を1秒に設定
   M5.Lcd.printf("...");
   float gyroSumZ = 0;
   int count = CALIBCOUNT;
@@ -109,7 +109,7 @@ bool getIsHoll() {
   // HALLセンサーの取得（HIGH:0,LOW:1）
   bool status = digitalRead(HALL);
   bool isHoll = false;
-  
+
   // 前がLOWでHIGHになればTRUE
   if (status != last_status) {
     if (status == 0) {
@@ -153,21 +153,27 @@ void Main() {
     M5.Lcd.printf("%4.0f", yaw);
 
     // 左の判定
-    if (yaw < -40) {
+    if (yaw < -20) {
       left_flag = 1;
       Serial.println(left_flag);
     }
 
     // 右の判定
-    if (yaw > 40) {
+    if (yaw > 20) {
       right_flag = 2;
       Serial.println(right_flag);
     }
 
     // 真ん中
-    if ((yaw >= 0 && yaw < 10) || (yaw <= 0 && yaw > -10)) {
+    if ((yaw >= 0 && yaw < 20) || (yaw <= 0 && yaw > -20)) {
       center_flag = 0;
       Serial.println(center_flag);
+    }
+
+    // yawが45度以上または-45度以下になったらリセットとキャリブレーションを行う
+    if (yaw >= 80 || yaw <= -80) {
+      ResetGyro();
+      Main();
     }
 
     if (M5.BtnA.wasPressed()) {
@@ -197,6 +203,7 @@ void setup() {
   delay(1);
 
   // 自動的にキャリブレーションとMainを実行
+  ResetGyro();
   calibration();
   Main();
 }

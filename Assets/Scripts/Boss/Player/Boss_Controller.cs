@@ -57,7 +57,7 @@ public class Boss_Controller : MonoBehaviour
             if (serialReceive.Flag_view == 2)
             {
                 // プレイヤーを右に回転
-                transform.RotateAround(rotationCenter.transform.position, Vector3.up, 10.0f);
+                transform.RotateAround(rotationCenter.transform.position, Vector3.up, 50.0f);
                 // 横振りの判定
                 if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
                 {
@@ -73,7 +73,7 @@ public class Boss_Controller : MonoBehaviour
             if (serialReceive.Flag_view == 1)
             {
                 // プレイヤーを左に回転
-                transform.RotateAround(rotationCenter.transform.position, Vector3.up, -10.0f);
+                transform.RotateAround(rotationCenter.transform.position, Vector3.up, -50.0f);
                 // 横振りの判定
                 if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
                 {
