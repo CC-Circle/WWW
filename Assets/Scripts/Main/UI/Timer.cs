@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour
 
     private bool hasPlayedFinishSound = true; // フィニッシュサウンドが再生済みかどうか
     public float countTime = 40f; // カウントダウンの初期時間
+    private bool hasPlayedWarningSound = false;
 
     private void Start()
     {
@@ -105,8 +106,9 @@ public class Timer : MonoBehaviour
     {
         // warningObjectは親オブジェクト (warningオブジェクト) に対応
         warningText warningTextScript = warningObject.GetComponent<warningText>();
+        WarningSound warningSoundScript = warningObject.GetComponent<WarningSound>();
         int delay = -3;
-        
+
         if (countTime <= delay)
         {
             finishTextObject.SetActive(false);
@@ -115,6 +117,13 @@ public class Timer : MonoBehaviour
             {
                 // warningTextスクリプトを有効化
                 warningTextScript.enabled = true;
+
+                // 一回だけ実行するためのフラグを設定
+                if (!hasPlayedWarningSound)
+                {
+                    warningSoundScript.ShotWarningSound();
+                    hasPlayedWarningSound = true;
+                }
             }
             else
             {
