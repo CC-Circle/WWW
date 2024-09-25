@@ -33,7 +33,17 @@ public class Hatake : MonoBehaviour
         Timer timerScript = GameObject.Find("UIManager").GetComponent<Timer>();
         if (timerScript.countTime <= 0)
         {
-            gameObject.GetComponent<BoxCollider>().enabled = false;
+            // "DynamicObjects"という名前のオブジェクトを探す
+            GameObject dynamicObjects = GameObject.Find("DynamicObjects");
+
+            if (dynamicObjects != null)
+            {
+                // 子オブジェクトをすべて削除
+                foreach (Transform child in dynamicObjects.transform)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
         }
     }
 
