@@ -10,6 +10,7 @@ TagManager:
   - CloneEnemy
   - Overlap
   - Healing
+  - BossScript
   layers:
   - Default
   - TransparentFX

@@ -2,11 +2,18 @@ using UnityEngine;
 
 public class DontDestroy : MonoBehaviour
 {
-
-    public GameObject[] DontDestroyObjects;
+    private static bool created = false;
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        if (!created)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            created = true;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
     }
 }
