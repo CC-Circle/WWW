@@ -18,12 +18,21 @@ public class BossAttack : MonoBehaviour
     [SerializeField] private float attackTimer = 0f; // 攻撃の間隔
     [SerializeField] private bool playShotSound = true; // ショットサウンドの再生フラグ
     [SerializeField] public static float currentHealthRate = 1f; // 現在のHPレート
+
+    //太田追加要素
+    [SerializeField] private GameObject cameraObject;  // カメラをしてい
+    private Shake shakeScript; // スクリプト型変数を定義
+    
     private float HatakeHP;
 
     void Start()
     {
+        //太田追加
+        shakeScript = cameraObject.GetComponent<Shake>(); // cameraObject から Shake スクリプトを取得
         GetHPAndHealing();
         UpdateHealthBar(HatakeHP);
+        //太田追加
+        shakeScript.TriggerShake(7.5f);  // カメラを揺らす
     }
 
     void Update()
@@ -70,6 +79,8 @@ public class BossAttack : MonoBehaviour
         {
             ApplyDamage(damageRate);
             attackTimer = 0;
+            //太田追加
+            shakeScript.TriggerShake(2.5f);  // カメラを揺らす
         }
 
     }
