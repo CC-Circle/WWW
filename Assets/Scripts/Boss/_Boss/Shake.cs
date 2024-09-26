@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shake : MonoBehaviour
 {
-    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource audioSource; //ボスSEを定義
 
     public float shakeDuration = 0.5f;      // 揺れる時間
     public float shakeMagnitude = 0.1f;      // 固定の揺れの強さ

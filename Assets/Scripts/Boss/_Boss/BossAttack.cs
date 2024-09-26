@@ -20,7 +20,7 @@ public class BossAttack : MonoBehaviour
     [SerializeField] public static float currentHealthRate = 1f; // 現在のHPレート
 
     //太田追加要素
-    [SerializeField] private GameObject cameraObject;  // カメラをしてい
+    [SerializeField] private GameObject cameraObject;  // カメラを指定
     private Shake shakeScript; // スクリプト型変数を定義
     
     private float HatakeHP;
