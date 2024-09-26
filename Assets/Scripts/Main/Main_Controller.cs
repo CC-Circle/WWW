@@ -57,12 +57,12 @@ public class Main_Controller : MonoBehaviour
         if (serialReceive.Flag_view == 1)
         {
             // プレイヤーを左に回転
-            transform.RotateAround(rotationCenter.transform.position, Vector3.up, -0.5f);
+            transform.RotateAround(rotationCenter.transform.position, Vector3.up, -1.5f);
         }
         else if (serialReceive.Flag_view == 2)
         {
             // プレイヤーを右に回転
-            transform.RotateAround(rotationCenter.transform.position, Vector3.up, 0.5f);
+            transform.RotateAround(rotationCenter.transform.position, Vector3.up, 1.5f);
         }
 
         if (serialReceive.Flag_button == 1)
