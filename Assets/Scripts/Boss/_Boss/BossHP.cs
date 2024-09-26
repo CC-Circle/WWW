@@ -10,6 +10,8 @@ public class BossHP : MonoBehaviour
     [SerializeField] private AudioSource delayedAudioSource; // 遅延再生しているオーディオソース
     [SerializeField] private AudioSource immediateAudioSource; // 撃破音を定義
 
+    private bool onetime = false;
+
     public void TakeDamage(int damage)
     {
         maxHealth -= damage;
@@ -21,8 +23,7 @@ public class BossHP : MonoBehaviour
         // ゆっくりと下に沈む
         transform.Translate(Vector3.down * Time.deltaTime * 100);
 
-         // 優先的にオーディオソースを再生
-        immediateAudioSource.Play();
+        
 
         if (transform.position.y < -300)
         {
@@ -38,6 +39,14 @@ public class BossHP : MonoBehaviour
         {
             //再生しているものを停止
             delayedAudioSource.Stop();
+
+            // 一回だけ実行するためのフラグを設定
+            if (!onetime)
+            {
+                // 優先的にオーディオソースを再生
+                immediateAudioSource.Play();
+                onetime = true;
+            }
             Die();
         }
     }
