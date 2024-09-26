@@ -43,7 +43,7 @@ public class EnemySpawner : MonoBehaviour
         }
         else if (TimerScript.countTime < 10)
         {
-            spawnInterval = 1.0f;
+            spawnInterval = 1.5f;
         }
     }
 
