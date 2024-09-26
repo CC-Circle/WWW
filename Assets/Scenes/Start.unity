@@ -1028,7 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906ccf9b64769402f9c6c5747374eea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: /dev/tty.usbserial-55910044091
+  portName: /dev/cu.wchusbserial55910045011
   baudRate: 115200
   Settingsflag: 0
 --- !u!114 &962507535
@@ -2299,8 +2299,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: OK
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
-  m_sharedMaterial: {fileID: 462649656502465482, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2649,8 +2649,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30B3\u30F3\u30C8\u30ED\u30FC\u30E9\u30FC\u3092\u304A\u3044\u3066\u304F\u3060\u3055\u3044"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
-  m_sharedMaterial: {fileID: 462649656502465482, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
