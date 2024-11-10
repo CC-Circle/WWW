@@ -19,11 +19,11 @@ public class BossHP : MonoBehaviour
     }
 
     void Die()
-    {   
+    {
         // ゆっくりと下に沈む
         transform.Translate(Vector3.down * Time.deltaTime * 100);
 
-        
+
 
         if (transform.position.y < -300)
         {
@@ -31,6 +31,7 @@ public class BossHP : MonoBehaviour
         }
 
     }
+
 
     void Update()
     {
@@ -48,6 +49,11 @@ public class BossHP : MonoBehaviour
                 onetime = true;
             }
             Die();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            TakeDamage(1); // 1ダメージを与える
         }
     }
 

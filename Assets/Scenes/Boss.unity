@@ -988,6 +988,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 0.001
   rotationCenter: {fileID: 733171291}
+  minRotationAngle: -50
+  maxRotationAngle: 50
 --- !u!1001 &201897893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6835,8 +6837,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u30DC\u30B9\u30E2\u30B0\u30E9\u304C\u73FE\u308C\u305F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
-  m_sharedMaterial: {fileID: 462649656502465482, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
+  m_sharedMaterial: {fileID: 462649656502465482, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7721,8 +7723,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u632F\u308C\uFF01\uFF01"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
-  m_sharedMaterial: {fileID: 462649656502465482, guid: 07e264b81e45741cd83b0902f7abe1e3, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
+  m_sharedMaterial: {fileID: 462649656502465482, guid: 3fb07c019d82e4aa7abd29e636a76675, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
