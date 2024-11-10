@@ -14,6 +14,13 @@ public class Boss_Controller : MonoBehaviour
     private int last_sencer_flag = 0; // 前回のセンサーフラグ
     private float soundEffectInterval = 3f; // サウンドエフェクト再生間隔
     private bool isMove = false;
+    private float rotationSpeed = 100.0f;
+    private float timer = 0.0f;
+    private bool rotateRight = true;
+    private float currentRotationAngle = 0.0f; // 現在の回転角度
+    [SerializeField] private float minRotationAngle = -50.0f; // 回転角度の最小値
+    [SerializeField] private float maxRotationAngle = 50.0f; // 回転角度の最大値
+
 
     private void Start()
     {
@@ -39,6 +46,27 @@ public class Boss_Controller : MonoBehaviour
         {
             HandleMouseInput();
         }
+
+        // 1秒ごとにプレイヤーを左右に回転
+        // transform.RotateAround(rotationCenter.transform.position, Vector3.up, 50.0f);
+        timer += Time.deltaTime;
+        if (timer >= 1.0f)
+        {
+            rotateRight = !rotateRight;
+            timer = 0.0f;
+        }
+
+        float rotationDirection = rotateRight ? 1.0f : -1.0f;
+        float rotationAmount = rotationSpeed * rotationDirection * Time.deltaTime;
+        float newRotationAngle = currentRotationAngle + rotationAmount;
+
+        // 回転角度が範囲内に収まるように制御
+        if (newRotationAngle >= minRotationAngle && newRotationAngle <= maxRotationAngle)
+        {
+            transform.RotateAround(rotationCenter.transform.position, Vector3.up, rotationAmount);
+            currentRotationAngle = newRotationAngle;
+        }
+
     }
 
     /// <summary>
@@ -57,12 +85,14 @@ public class Boss_Controller : MonoBehaviour
             if (serialReceive.Flag_view == 2)
             {
                 // プレイヤーを右に回転
-                transform.RotateAround(rotationCenter.transform.position, Vector3.up, 50.0f);
+                // transform.RotateAround(rotationCenter.transform.position, Vector3.up, 50.0f);
                 // 横振りの判定
-                if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
-                {
-                    BossHPScript.TakeDamage(1);
-                }
+                // if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
+                // {
+                //     BossHPScript.TakeDamage(1);
+                // }
+
+                // BossHPScript.TakeDamage(1);
                 // センサーのフラグ保存
                 last_sencer_flag = 2;
             }
@@ -73,12 +103,14 @@ public class Boss_Controller : MonoBehaviour
             if (serialReceive.Flag_view == 1)
             {
                 // プレイヤーを左に回転
-                transform.RotateAround(rotationCenter.transform.position, Vector3.up, -50.0f);
+                // transform.RotateAround(rotationCenter.transform.position, Vector3.up, -50.0f);
                 // 横振りの判定
-                if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
-                {
-                    BossHPScript.TakeDamage(1);
-                }
+                // if (serialReceive.Flag_view != last_sencer_flag && serialReceive.Flag_view != 0)
+                // {
+                //     BossHPScript.TakeDamage(1);
+                // }
+
+                // BossHPScript.TakeDamage(1);
                 // センサーのフラグ保存
                 last_sencer_flag = 1;
             }
